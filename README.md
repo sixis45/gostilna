@@ -19,7 +19,7 @@ The markup and design follow the reference UI. Changes from the original:
 - If a photo can't load, a stand-in appears instead of a broken image: a drawn river landscape in the hero, and a teal panel with an icon elsewhere.
 - Small mobile fixes: smaller headline sizes on phones (using the UI's own `*-mobile` type tokens) and wrapping so nothing overflows sideways.
 
-The photos are still loaded from the original `lh3.googleusercontent.com` links. Download them into the repo if you want the site to keep working when those links expire.
+The photos and logo from the reference UI are stored in `img/` at full resolution, so the site no longer depends on the original `lh3.googleusercontent.com` links.
 
 ### Editing styles
 
