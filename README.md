@@ -2,61 +2,73 @@
 
 Demo website for a fictional gostilna in the Soča valley. The gostilna, its menus and contact details are made up.
 
-`index.html` is the whole site. It's built on the reference "Restavracija Soča" UI (Tailwind, Plus Jakarta Sans + Inter, Material Symbols icons).
+The site is built on the reference "Restavracija Soča" UI: Tailwind, Plus Jakarta Sans + Inter, and Material Symbols icons drawn as inline SVG.
 
-## What changed from the reference UI
+## Files
 
-- The name is Gostilna Pri Brvi, and the river flow widget in the hero is removed.
-- All text is rewritten for a family gostilna: no awards, chef or tasting menus; two 4-course gostilna menus; corrected facts (Tolminc is a cow's milk cheese, Rebula, no Karst or Triglav in Kobarid); Slovenian sentence case; Slovenian alt text.
-- Tailwind is compiled into `styles.css` instead of loaded from the play CDN (`cdn.tailwindcss.com`), which isn't meant for production.
-- Icons are inline SVG (Material Symbols Outlined), and Inter and Plus Jakarta Sans are self-hosted in `fonts/`. The page makes no requests to Google, which keeps it working where Google Fonts are blocked and avoids the GDPR issue of loading fonts from Google.
-- The photos and logo are stored in `img/` at full resolution.
-- The navigation links scroll to their sections, and the "Izberite ta meni" buttons add the chosen menu to the reservation notes.
-- The reservation date defaults to the next open day (Wednesday–Sunday), at least 3 days ahead.
-- The reservation and newsletter forms submit to Netlify Forms (see below).
-- If a photo can't load, a stand-in appears instead of a broken image: a drawn river landscape in the hero, and a teal panel elsewhere.
-- Small mobile fixes: smaller headline sizes on phones (using the UI's own `*-mobile` type tokens) and wrapping so nothing overflows sideways.
+| Path | What it is |
+| --- | --- |
+| `index.html` | The Slovenian page, and the source for the other languages |
+| `src/translations.json` | English and Italian text, keyed by the exact Slovenian text |
+| `scripts/build-pages.mjs` | Builds `en/index.html` and `it/index.html` from the two files above |
+| `zasebnost.html`, `dostopnost.html` | Privacy policy and accessibility statement (SL / EN / IT on one page) |
+| `404.html` | "Page not found" page |
+| `netlify/functions/submission-created.js` | Optional confirmation email to guests (see below) |
+| `img/`, `fonts/`, `favicon*` | WebP photos, share image, self-hosted fonts, icons |
+| `robots.txt`, `sitemap.xml` | For search engines |
 
-## Languages
-
-The page is in Slovenian, with English and Italian available from the SL / EN / IT switch in the header. The choice is remembered in the browser.
-
-The Slovenian text lives in the HTML. The English and Italian versions are in the `T` dictionary in the script at the bottom of `index.html`, keyed by the exact Slovenian text. When you change a Slovenian sentence, change its key in `T` as well, or that sentence stays in Slovenian in the other languages. Messages the script writes (form results) are in `M`.
-
-## Favicon
-
-`favicon.svg` (modern browsers), `favicon-32.png` (fallback) and `apple-touch-icon.png` (iOS home screen) use the logo mark: mountains, the footbridge and the river.
-
-## Editing styles
-
-After changing Tailwind classes in `index.html`, rebuild the CSS:
+## Building
 
 ```sh
 npm install
-npm run build:css
+npm run build        # CSS + English and Italian pages
 ```
 
-The colour palette and type scale live in `tailwind.config.js`, and the font faces in `src/fonts.css`. Netlify rebuilds the CSS on every deploy anyway.
+`npm run build:css` only rebuilds `styles.css` (after changing Tailwind classes). `npm run build:pages` only rebuilds `en/` and `it/`, which are generated and not committed. Netlify runs `npm run build` on every deploy.
 
-## Deploying to Netlify
+## Languages
 
-`netlify.toml` already holds the settings: Netlify runs `npm run build:css` and publishes the repository root.
+Slovenian is at `/`, English at `/en/` and Italian at `/it/`. Each is a real page with its own `lang`, canonical URL and `hreflang` links, so search engines index all three. The SL / EN / IT switch links between them.
 
-1. In Netlify choose **Add new site → Import an existing project → GitHub**, pick `sixis45/gostilna` and the `main` branch, and deploy.
-2. Under **Forms**, click **Enable form detection**, then trigger a new deploy (Deploys → Trigger deploy). Netlify finds the forms while it deploys.
-3. For emails, go to **Site configuration → Notifications → Emails and webhooks → Form submission notifications**, add an email notification, and pick the `reservation` form (and `newsletter`, if you want those too).
+To change text, edit the Slovenian in `index.html` and update the matching key in `src/translations.json`. The build warns when a translation no longer matches any text on the page. Messages written by the page script (form results, validation) are in the `M` object at the bottom of `index.html`.
+
+## What's on the page
+
+- **Menus** with allergen codes (EU numbering) and a legend.
+- **Reservation form:** it refuses Mondays and Tuesdays, past dates and times that have already passed today. The email field is optional.
+- **Navigation:** a menu button below 1280 px wide, and a "skip to content" link.
+- **Contact:** the map, "Navodila za pot", phone and email all open the right app.
+- **Social sharing and search:** a description, a share image for WhatsApp/Facebook (`img/og.jpg`), and schema.org `Restaurant` data (hours, address, menus, prices).
+- **Speed:** WebP photos with smaller versions for phones, lazy loading, fixed image sizes, and preloaded hero image and fonts.
+- **Security:** headers set in `netlify.toml`: CSP, nosniff, frame and referrer policy, and long caching for fonts.
+- **Offline-proof assets:** the page makes no requests to Google or any other third party.
+
+## Before going live with a real gostilna
+
+1. Replace the placeholders: name, address (also in the Google Maps links and the schema.org data), phone, email and photos. In `zasebnost.html`, fill in the company details (in square brackets) and have a lawyer check the text.
+2. Connect a custom domain in Netlify. The build uses Netlify's `URL` automatically for canonical links, the sitemap and the share image.
+3. Set the environment variable `SITE_INDEXABLE=true` in Netlify. Until then every page carries `noindex`, so the demo with its made-up details stays out of Google.
+
+## Netlify setup
+
+`netlify.toml` holds the build settings, headers and functions folder.
+
+1. **Forms:** under **Forms**, enable form detection and redeploy. Under **Site configuration → Notifications → Emails and webhooks → Form submission notifications**, add an email for the `reservation` form.
+2. **Guest confirmation email (optional):**
+   - Create a free [Resend](https://resend.com) account and verify your domain there.
+   - In Netlify, set `RESEND_API_KEY` and `CONFIRMATION_FROM` (for example `Gostilna Pri Brvi <rezervacije@your-domain.si>`), and optionally `CONFIRMATION_REPLY_TO`.
+   - Guests who leave an email then get a short "we've received your request" message in their language. Without these variables the function does nothing.
+3. **Newsletter:** Netlify Forms only collects the addresses. To send newsletters, export them (Forms → newsletter → Export) into a tool like Brevo or Mailchimp.
 
 ### Forms
 
 | Form | Fields |
 | --- | --- |
-| `reservation` | `guests`, `date`, `time`, `seating` (`terasa` / `kamin` / `vseeno`), `name`, `phone`, `notes`, `language` (`sl` / `en` / `it`, the language the guest used) |
+| `reservation` | `guests`, `date`, `time`, `seating` (`terasa` / `kamin` / `vseeno`), `name`, `phone`, `email`, `notes`, `language` (`sl` / `en` / `it`) |
 | `newsletter` | `email` |
 
-Both forms send in the background (AJAX), so the guest stays on the page and sees the result in their language. Submissions appear under **Forms** in Netlify. Spam is filtered by Netlify's built-in filter plus a hidden `bot-field` honeypot.
-
-Outside Netlify (opened as a local file, for example) sending fails, and the page shows a message asking the guest to call.
+Both forms send in the background, and the guest sees the result in their language. Spam is filtered by Netlify plus a hidden `bot-field` honeypot. Outside Netlify, sending fails and the page asks the guest to call.
 
 ## Running locally
 
-No server needed: open `index.html` in a browser, or serve the folder with `npx serve .`. The forms only send on Netlify.
+Run `npm run build`, then serve the folder with `npx serve .` and open `http://localhost:3000`, `/en/` or `/it/`. The forms only send on Netlify.
