@@ -1,1 +1,4 @@
 node_modules/
+# built by scripts/build-pages.mjs
+/en/
+/it/

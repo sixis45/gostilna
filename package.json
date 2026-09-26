@@ -2,7 +2,9 @@
   "name": "gostilna",
   "private": true,
   "scripts": {
-    "build:css": "tailwindcss -c tailwind.config.js -i src/tailwind.css -o styles.css --minify"
+    "build:css": "tailwindcss -c tailwind.config.js -i src/tailwind.css -o styles.css --minify",
+    "build:pages": "node scripts/build-pages.mjs",
+    "build": "npm run build:css && npm run build:pages"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"
