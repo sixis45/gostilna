@@ -1,0 +1,4 @@
+# Netlify: rebuild the Tailwind CSS and publish the repository root.
+[build]
+  command = "npm run build:css"
+  publish = "."
