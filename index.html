@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&family=Young+Serif&display=swap">
 <style>
 :root {
+  color-scheme: light;
   --bg: #F8F9FF;
   --surface: #FFFFFF;
   --surface-2: #EFF4FF;
@@ -26,126 +27,41 @@
   --tertiary: #8D4B00;
   --special-bg: #FFF1E6;
   --board: #213145;
-  --deep: #0B1C30;
   --on-deep: #EAF1FF;
   --ok: #00685F;
   --err: #BA1A1A;
   --marker: #BA1A1A;
 
-  /* hero scene */
-  --sky-top: #D3E4FE;
-  --sky-bottom: #F8F9FF;
+  /* hero: navy like the reference UI, fading into the page at the bottom */
+  --hero-ink: #FFFFFF;
+  --hero-ink-2: #D3E4FE;
+  --hero-accent: #89F5E7;
+  --sky-top: #0B1C30;
+  --sky-bottom: #26384F;
   --stars: 0;
+  --glow: 1;
   --star: #FFFFFF;
-  --snow: #FFFFFF;
-  --ridge-1: #B9C7E0;
-  --ridge-2: #8593AA;
-  --ridge-3: #515F74;
+  --snow: #D3E4FE;
+  --ridge-1: #7A889E;
+  --ridge-2: #515F74;
+  --ridge-3: #3A485C;
   --ridge-4: #213145;
   --meadow: #005049;
-  --gravel: #EFF4FF;
+  --gravel: #B9C7E0;
   --river: #6BD8CB;
   --river-deep: #008378;
   --river-hi: #F4FFFC;
-  --bridge: #0B1C30;
+  --bridge: #EAF1FF;
   --wall: #EAF1FF;
-  --roof: #213145;
+  --roof: #0B1C30;
   --window: #FFB77D;
   --tree: #00201D;
+  --hero-fade: #F8F9FF;
 
   --font-display: "Young Serif", Georgia, "Times New Roman", serif;
   --font-body: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --radius: 6px;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --bg: #0B1C30;
-    --surface: #13263D;
-    --surface-2: #0F2237;
-    --surface-3: #213145;
-    --ink: #EAF1FF;
-    --ink-2: #B9C7E0;
-    --rule: #34465E;
-    --accent: #6BD8CB;
-    --accent-ink: #00201D;
-    --accent-hover: #89F5E7;
-    --accent-hover-ink: #00201D;
-    --veg-bg: #005049;
-    --veg-ink: #89F5E7;
-    --tertiary: #FFB77D;
-    --special-bg: #3D3226;
-    --board: #213145;
-    --deep: #06111F;
-    --on-deep: #EAF1FF;
-    --ok: #6BD8CB;
-    --err: #FFB4AB;
-    --marker: #E5534B;
-    --sky-top: #040D18;
-    --sky-bottom: #0B1C30;
-    --stars: 1;
-    --star: #EAF1FF;
-    --snow: #7D8EA6;
-    --ridge-1: #34465E;
-    --ridge-2: #26384F;
-    --ridge-3: #1A2B41;
-    --ridge-4: #102134;
-    --meadow: #00352F;
-    --gravel: #34465E;
-    --river: #008378;
-    --river-deep: #005049;
-    --river-hi: #89F5E7;
-    --bridge: #B9C7E0;
-    --wall: #34465E;
-    --roof: #06111F;
-    --window: #FFB77D;
-    --tree: #031018;
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #0B1C30;
-  --surface: #13263D;
-  --surface-2: #0F2237;
-  --surface-3: #213145;
-  --ink: #EAF1FF;
-  --ink-2: #B9C7E0;
-  --rule: #34465E;
-  --accent: #6BD8CB;
-  --accent-ink: #00201D;
-  --accent-hover: #89F5E7;
-  --accent-hover-ink: #00201D;
-  --veg-bg: #005049;
-  --veg-ink: #89F5E7;
-  --tertiary: #FFB77D;
-  --special-bg: #3D3226;
-  --board: #213145;
-  --deep: #06111F;
-  --on-deep: #EAF1FF;
-  --ok: #6BD8CB;
-  --err: #FFB4AB;
-  --marker: #E5534B;
-  --sky-top: #040D18;
-  --sky-bottom: #0B1C30;
-  --stars: 1;
-  --star: #EAF1FF;
-  --snow: #7D8EA6;
-  --ridge-1: #34465E;
-  --ridge-2: #26384F;
-  --ridge-3: #1A2B41;
-  --ridge-4: #102134;
-  --meadow: #00352F;
-  --gravel: #34465E;
-  --river: #008378;
-  --river-deep: #005049;
-  --river-hi: #89F5E7;
-  --bridge: #B9C7E0;
-  --wall: #34465E;
-  --roof: #06111F;
-  --window: #FFB77D;
-  --tree: #031018;
-}
-
 /* language switch: Slovenian is the default, English replaces it */
 :root:not([data-lang="en"]) [lang="en"] { display: none !important; }
 :root[data-lang="en"] [lang="sl"] { display: none !important; }
@@ -198,7 +114,7 @@ img, canvas { max-width: 100%; }
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   -webkit-backdrop-filter: saturate(1.2) blur(12px);
   backdrop-filter: saturate(1.2) blur(12px);
-  border-bottom: 1px solid color-mix(in srgb, var(--rule) 75%, transparent);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, .04);
 }
 .header-inner { display: flex; align-items: center; gap: 16px; min-height: 64px; }
 .brand {
@@ -222,14 +138,16 @@ img, canvas { max-width: 100%; }
 @media (max-width: 480px) { .header-cta { display: none; } }
 
 /* hero */
-.hero { position: relative; isolation: isolate; overflow: hidden; background: var(--sky-bottom); }
+.hero { position: relative; isolation: isolate; overflow: hidden; background: var(--sky-top); color: var(--hero-ink); }
+.hero :focus-visible { outline-color: var(--hero-accent); }
 .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: -1; }
 .hero-copy { display: grid; justify-items: start; gap: 22px; padding-top: clamp(44px, 7vw, 92px); padding-bottom: 28px; }
-.hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; font-size: .92rem; font-weight: 500; }
+.hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; font-size: .92rem; font-weight: 500; color: var(--hero-ink-2); }
 .status {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 5px 12px 5px 10px; border-radius: 999px; font-size: .85rem; font-weight: 500;
-  background: color-mix(in srgb, var(--surface) 82%, transparent); border: 1px solid color-mix(in srgb, var(--rule) 60%, transparent);
+  background: rgba(255, 255, 255, .86); color: var(--ink); border: 0;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   font-variant-numeric: tabular-nums;
 }
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-2); }
@@ -238,9 +156,11 @@ img, canvas { max-width: 100%; }
 .h1-kicker {
   display: block; margin-bottom: 14px;
   font-family: var(--font-body); font-size: clamp(.85rem, 1.4vw, 1rem); font-weight: 700;
-  letter-spacing: .24em; text-transform: uppercase; color: var(--accent);
+  letter-spacing: .24em; text-transform: uppercase; color: var(--hero-accent);
 }
-.lead { max-width: 38ch; font-size: clamp(1.1rem, 1.7vw, 1.3rem); line-height: 1.5; }
+.lead { max-width: 38ch; font-size: clamp(1.1rem, 1.7vw, 1.3rem); line-height: 1.5; color: var(--hero-ink-2); }
+.hero .btn-ghost { color: var(--hero-ink); background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .22); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.hero .btn-ghost:hover { background: rgba(255, 255, 255, .24); border-color: rgba(255, 255, 255, .32); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero-scene { height: clamp(230px, 34vw, 440px); }
 
@@ -261,6 +181,10 @@ img, canvas { max-width: 100%; }
 .daily-title { font-family: var(--font-display); font-size: 1.45rem; color: #FFFFFF; }
 .daily-when { flex: 1 1 260px; font-size: .95rem; }
 .daily-price { font-family: var(--font-display); font-size: 1.45rem; color: #FFFFFF; font-variant-numeric: tabular-nums; }
+.menu-card {
+  padding: clamp(20px, 4vw, 48px); background: var(--surface); border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .08), 0 2px 4px -2px rgba(0, 0, 0, .06);
+}
 .menu-cols { columns: 2 340px; column-gap: clamp(40px, 6vw, 88px); }
 .menu-cat { break-inside: avoid; padding-bottom: 44px; }
 .menu-cat h3 { font-size: 1.6rem; padding-bottom: 10px; border-bottom: 1.5px solid var(--ink); }
@@ -315,14 +239,13 @@ img, canvas { max-width: 100%; }
 }
 
 /* visit */
-.visit { border-top: 1px solid var(--rule); }
 .visit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px); }
 @media (max-width: 960px) {
   .visit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .visit-block:last-child { grid-column: 1 / -1; }
 }
 @media (max-width: 640px) { .visit-grid { grid-template-columns: 1fr; } }
-.visit-block { display: grid; gap: 14px; align-content: start; }
+.visit-block { display: grid; gap: 14px; align-content: start; padding: clamp(20px, 3vw, 28px); background: var(--surface-2); border-radius: 12px; box-shadow: 0 1px 2px rgba(0, 0, 0, .05); }
 .visit-block h3 { font-size: 1.45rem; padding-bottom: 10px; border-bottom: 1.5px solid var(--ink); }
 .table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .table th, .table td { padding: 9px 0; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
@@ -385,11 +308,11 @@ address { font-style: normal; line-height: 1.55; }
 .summary dd { font-weight: 500; }
 
 /* footer */
-.site-footer { padding-block: 48px; background: var(--deep); color: var(--on-deep); }
+.site-footer { padding-block: 48px; background: var(--surface-2); color: var(--ink); border-top: 1px solid var(--surface-3); }
 .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 48px; }
-.footer-brand { font-family: var(--font-display); font-size: 2rem; color: #FFFFFF; }
+.footer-brand { font-family: var(--font-display); font-size: 2rem; color: var(--ink); }
 .footer-info { font-size: .95rem; font-variant-numeric: tabular-nums; }
-.demo-note { margin-top: 28px; padding-top: 18px; border-top: 1px solid color-mix(in srgb, var(--on-deep) 20%, transparent); font-size: .85rem; color: color-mix(in srgb, var(--on-deep) 75%, transparent); }
+.demo-note { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: .85rem; color: var(--ink-2); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -483,6 +406,7 @@ address { font-style: normal; line-height: 1.55; }
         <p class="daily-price">12,90&nbsp;€</p>
       </div>
 
+      <div class="menu-card">
       <div class="menu-cols">
         <section class="menu-cat" aria-labelledby="cat-1">
           <h3 id="cat-1"><span lang="sl">Predjedi</span><span lang="en">Starters</span></h3>
@@ -596,6 +520,7 @@ address { font-style: normal; line-height: 1.55; }
         <span lang="sl">Alergeni: 1 gluten · 3 jajca · 4 ribe · 7 mleko · 8 oreški · 9 listna zelena · 12 sulfiti. V pomeni brez mesa. Cene vključujejo DDV.</span>
         <span lang="en">Allergens: 1 gluten · 3 eggs · 4 fish · 7 milk · 8 nuts · 9 celery · 12 sulphites. V means vegetarian. Prices include VAT.</span>
       </p>
+      </div>
     </div>
   </section>
 
@@ -1087,7 +1012,7 @@ address { font-style: normal; line-height: 1.55; }
       snow: css("--snow"), r1: css("--ridge-1"), r2: css("--ridge-2"), r3: css("--ridge-3"), r4: css("--ridge-4"),
       meadow: css("--meadow"), gravel: css("--gravel"), river: css("--river"), riverDeep: css("--river-deep"),
       riverHi: css("--river-hi"), bridge: css("--bridge"), wall: css("--wall"), roof: css("--roof"),
-      win: css("--window"), tree: css("--tree")
+      win: css("--window"), tree: css("--tree"), glow: css("--glow") === "1", fade: css("--hero-fade")
     };
     var S = sceneBox.offsetHeight, top = H - S;
     var B = layer(), F = layer(), b = B.g, f = F.g;
@@ -1234,7 +1159,7 @@ address { font-style: normal; line-height: 1.55; }
     f.fillRect(hx + hw2 * 0.66, hy - wallH - hw2 * 0.62, hw2 * 0.1, hw2 * 0.3);
     f.beginPath(); f.moveTo(hx - hw2 * 0.12, hy - wallH); f.lineTo(hx + hw2 * 0.5, hy - wallH - hw2 * 0.62); f.lineTo(hx + hw2 * 1.12, hy - wallH); f.closePath(); f.fill();
     var ww = hw2 * 0.16, wy = hy - wallH * 0.68;
-    if (C.stars) {
+    if (C.glow) {
       var lg = f.createRadialGradient(hx + hw2 * 0.5, wy, 0, hx + hw2 * 0.5, wy, hw2 * 1.2);
       lg.addColorStop(0, rgba(C.win, 0.28)); lg.addColorStop(1, rgba(C.win, 0));
       f.fillStyle = lg; f.fillRect(hx - hw2, wy - hw2 * 1.2, hw2 * 3, hw2 * 2.4);
@@ -1249,6 +1174,11 @@ address { font-style: normal; line-height: 1.55; }
     spruce(f, W * 0.11, H + 6, S * 0.3);
     spruce(f, W * 0.95, H + 4, S * 0.38);
     spruce(f, W * 0.88, H + 8, S * 0.24);
+
+    // fade the foreground into the page, like the reference hero
+    var fadeH = Math.max(40, S * 0.16), fd = f.createLinearGradient(0, H - fadeH, 0, H);
+    fd.addColorStop(0, rgba(C.fade, 0)); fd.addColorStop(1, rgba(C.fade, 1));
+    f.fillStyle = fd; f.fillRect(0, H - fadeH, W, fadeH);
 
     back = B.c; front = F.c;
     kick();
@@ -1283,10 +1213,7 @@ address { font-style: normal; line-height: 1.55; }
     new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; if (visible) kick(); }).observe(hero);
   }
   document.addEventListener("visibilitychange", kick);
-  var darkQ = window.matchMedia("(prefers-color-scheme: dark)");
-  if (darkQ.addEventListener) darkQ.addEventListener("change", schedule);
   if (motion.addEventListener) motion.addEventListener("change", kick);
-  new MutationObserver(schedule).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
   build();
 })();
