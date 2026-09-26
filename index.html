@@ -87,13 +87,15 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 <body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-[1360px] mx-auto px-margin-lg flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><img alt="Gostilna Pri Brvi" data-logo="" data-icon="water" class="h-8 w-auto object-contain" src="img/logo.png"/><a class="hidden md:flex flex-col" data-path="home" href="#top"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none">Gostilna Pri Brvi</span><span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-medium mt-1">Domača kuhinja ob Soči</span></a></div><nav class="hidden xl:flex items-center gap-space-md" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-full px-space-md py-space-xs"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-3 py-1.5" data-path="our-story" href="#o-nas">O nas</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-3 py-1.5" data-path="seasonal-tasting-menu" href="#degustacija">Jedilnik</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-3 py-1.5" data-path="alpine-terroir" href="#sestavine">Sestavine</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-3 py-1.5" data-path="wine-cellar" href="#vinska-klet">Vina</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-3 py-1.5" data-path="ambiance-gallery" href="#galerija">Prostori</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container hover:text-on-primary-container rounded-full px-space-lg py-space-sm shadow-[0_4px_20px_-2px_rgba(13,148,136,0.2)] transition-all" data-path="table-reservation" href="#rezervacija">Rezervacija mize</a><div aria-label="Jezik / Language / Lingua" class="flex items-center rounded-full bg-surface-container p-0.5" role="group"><button aria-pressed="true" class="rounded-full px-2.5 py-1 font-label-sm text-label-sm text-on-surface-variant transition-colors hover:text-on-surface aria-pressed:bg-primary aria-pressed:text-on-primary" data-lang="sl" lang="sl" title="Slovenščina" type="button">SL</button><button aria-pressed="false" class="rounded-full px-2.5 py-1 font-label-sm text-label-sm text-on-surface-variant transition-colors hover:text-on-surface aria-pressed:bg-primary aria-pressed:text-on-primary" data-lang="en" lang="en" title="English" type="button">EN</button><button aria-pressed="false" class="rounded-full px-2.5 py-1 font-label-sm text-label-sm text-on-surface-variant transition-colors hover:text-on-surface aria-pressed:bg-primary aria-pressed:text-on-primary" data-lang="it" lang="it" title="Italiano" type="button">IT</button></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
 <!-- HERO SECTION WITH ASYMMETRIC RIVER VALLEY CANVAS -->
 <section class="relative w-full -mt-20 overflow-hidden bg-surface-container-low" id="top">
-<div class="relative min-h-[92vh] flex items-center pt-28 pb-16">
+<div class="relative min-h-[92vh] flex items-center pt-28 pb-28">
 <!-- Background Ambient Scrim & Visual -->
 <div class="absolute inset-0 z-0">
 <canvas aria-hidden="true" class="absolute inset-0 w-full h-full" id="heroScene"></canvas>
 <img alt="Turkizna Soča z leseno visečo brvjo, gozdom in gorami v ozadju" data-scene="" class="relative w-full h-full object-cover object-center scale-105" src="img/hero.jpg"/>
-<div class="absolute inset-0 bg-gradient-to-r from-on-surface/90 via-on-surface/75 to-transparent"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-on-surface/40"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-on-surface/80 via-on-surface/45 to-transparent"></div>
+<div class="absolute inset-0 bg-on-surface/25 md:hidden"></div>
+<div class="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-on-surface/50 to-transparent"></div>
+<div class="absolute inset-x-0 bottom-0 h-24 sm:h-32 bg-gradient-to-t from-surface to-transparent"></div>
 </div>
 <!-- Hero Content -->
 <div class="relative z-10 max-w-[1360px] mx-auto px-margin-lg w-full">
@@ -109,11 +111,11 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 </div>
 <!-- Main Headlines -->
 <div class="space-y-4">
-<span class="inline-block font-label-md text-label-md uppercase tracking-widest text-primary-fixed">Kobarid • Dolina Soče</span>
-<h1 class="font-display-hero text-display-hero-mobile sm:text-display-hero text-surface-container-lowest tracking-tight leading-[1.08]">
+<span class="inline-block font-label-md text-label-md uppercase tracking-widest text-primary-fixed [text-shadow:0_1px_10px_rgba(11,28,48,0.7)]">Kobarid • Dolina Soče</span>
+<h1 class="font-display-hero text-display-hero-mobile sm:text-display-hero text-surface-container-lowest tracking-tight leading-[1.08] [text-shadow:0_2px_24px_rgba(11,28,48,0.45)]">
               Domača kuhinja ob smaragdni Soči
             </h1>
-<p class="font-body-lg text-body-lg text-surface-variant max-w-2xl leading-relaxed">
+<p class="font-body-lg text-body-lg text-surface-variant max-w-2xl leading-relaxed [text-shadow:0_1px_12px_rgba(11,28,48,0.75)]">
               Soška postrv, frika, bovški krafi in kobariški štruklji. Kuhamo po receptih naše none iz tega, kar zraste v dolini, in jedi postrežemo na terasi tik nad reko.
             </p>
 </div>
@@ -129,7 +131,7 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 </a>
 </div>
 <!-- Accolades Strip -->
-<div class="pt-space-lg flex flex-wrap items-center gap-6 text-surface-container-lowest/90 font-label-sm text-label-sm">
+<div class="pt-space-lg flex flex-wrap items-center gap-6 text-surface-container-lowest/90 font-label-sm text-label-sm [text-shadow:0_1px_10px_rgba(11,28,48,0.8)]">
 <div class="flex items-center gap-2">
 <svg aria-hidden="true" class="w-[20px] h-[20px] shrink-0 text-primary-fixed" fill="currentColor" viewBox="0 -960 960 960"><path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/></svg>
 <span>Družinska gostilna od leta 1962</span>
