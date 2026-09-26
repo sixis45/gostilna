@@ -1,1221 +1,606 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="sl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Gostilna Pri Brvi</title>
-<meta name="description" content="Gostilna Pri Brvi v Čezsoči pri Bovcu: domača kuhinja zgornjega Posočja, soška postrv, frika in bovški krafi. Demo stran.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&family=Young+Serif&display=swap">
-<style>
-:root {
-  color-scheme: light;
-  --bg: #F8F9FF;
-  --surface: #FFFFFF;
-  --surface-2: #EFF4FF;
-  --surface-3: #E5EEFF;
-  --ink: #0B1C30;
-  --ink-2: #3D4947;
-  --rule: #BCC9C6;
-  --accent: #00685F;
-  --accent-ink: #FFFFFF;
-  --accent-hover: #008378;
-  --accent-hover-ink: #F4FFFC;
-  --veg-bg: #89F5E7;
-  --veg-ink: #005049;
-  --tertiary: #8D4B00;
-  --special-bg: #FFF1E6;
-  --board: #213145;
-  --on-deep: #EAF1FF;
-  --ok: #00685F;
-  --err: #BA1A1A;
-  --marker: #BA1A1A;
-
-  /* hero: navy like the reference UI, fading into the page at the bottom */
-  --hero-ink: #FFFFFF;
-  --hero-ink-2: #D3E4FE;
-  --hero-accent: #89F5E7;
-  --sky-top: #0B1C30;
-  --sky-bottom: #26384F;
-  --stars: 0;
-  --glow: 1;
-  --star: #FFFFFF;
-  --snow: #D3E4FE;
-  --ridge-1: #7A889E;
-  --ridge-2: #515F74;
-  --ridge-3: #3A485C;
-  --ridge-4: #213145;
-  --meadow: #005049;
-  --gravel: #B9C7E0;
-  --river: #6BD8CB;
-  --river-deep: #008378;
-  --river-hi: #F4FFFC;
-  --bridge: #EAF1FF;
-  --wall: #EAF1FF;
-  --roof: #0B1C30;
-  --window: #FFB77D;
-  --tree: #00201D;
-  --hero-fade: #F8F9FF;
-
-  --font-display: "Young Serif", Georgia, "Times New Roman", serif;
-  --font-body: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --radius: 6px;
-}
-/* language switch: Slovenian is the default, English replaces it */
-:root:not([data-lang="en"]) [lang="en"] { display: none !important; }
-:root[data-lang="en"] [lang="sl"] { display: none !important; }
-
-*, *::before, *::after { box-sizing: border-box; }
-[hidden] { display: none !important; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-h1, h2, h3, h4 { margin: 0; font-weight: 400; line-height: 1.1; text-wrap: balance; }
-h1, h2, h3 { font-family: var(--font-display); }
-p, ul, ol, dl, dd { margin: 0; }
-a { color: var(--accent); text-underline-offset: 3px; }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-img, canvas { max-width: 100%; }
-
-.wrap { width: 100%; max-width: 1160px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
-.section { padding-block: clamp(64px, 9vw, 120px); }
-.eyebrow {
-  font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent);
-}
-.section-head { display: grid; gap: 14px; max-width: 62ch; margin-bottom: clamp(32px, 5vw, 56px); }
-.section-head h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
-.section-head p:not(.eyebrow) { color: var(--ink-2); }
-
-/* buttons */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  font: inherit; font-size: 1rem; font-weight: 700; line-height: 1.2;
-  padding: 13px 24px; border-radius: 999px; border: 1.5px solid transparent;
-  text-decoration: none; cursor: pointer;
-  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
-}
-.btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 4px 20px -2px color-mix(in srgb, var(--accent) 28%, transparent); }
-.btn-primary:hover { background: var(--accent-hover); color: var(--accent-hover-ink); }
-.btn-ghost { color: var(--ink); border-color: color-mix(in srgb, var(--ink) 35%, transparent); }
-.btn-ghost:hover { border-color: var(--ink); }
-.btn-sm { padding: 8px 16px; font-size: .9rem; }
-
-/* header */
-.site-header {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  -webkit-backdrop-filter: saturate(1.2) blur(12px);
-  backdrop-filter: saturate(1.2) blur(12px);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, .04);
-}
-.header-inner { display: flex; align-items: center; gap: 16px; min-height: 64px; }
-.brand {
-  display: inline-flex; align-items: center; gap: 10px; margin-right: auto;
-  color: var(--ink); text-decoration: none; font-family: var(--font-display); font-size: 1.3rem; white-space: nowrap;
-}
-.brand svg { color: var(--accent); flex: none; }
-.nav { display: flex; gap: 2px; }
-.nav a {
-  color: var(--ink); text-decoration: none; font-weight: 500; font-size: .95rem;
-  padding: 8px 12px; border-radius: 999px;
-}
-.nav a:hover { background: var(--surface-3); }
-.lang { display: inline-flex; padding: 2px; border: 1px solid var(--rule); border-radius: 999px; }
-.lang button {
-  font: inherit; font-size: .78rem; font-weight: 700; letter-spacing: .08em;
-  color: var(--ink-2); background: none; border: 0; border-radius: 999px; padding: 5px 10px; cursor: pointer;
-}
-.lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
-@media (max-width: 780px) { .nav { display: none; } }
-@media (max-width: 480px) { .header-cta { display: none; } }
-
-/* hero */
-.hero { position: relative; isolation: isolate; overflow: hidden; background: var(--sky-top); color: var(--hero-ink); }
-.hero :focus-visible { outline-color: var(--hero-accent); }
-.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: -1; }
-.hero-copy { display: grid; justify-items: start; gap: 22px; padding-top: clamp(44px, 7vw, 92px); padding-bottom: 28px; }
-.hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; font-size: .92rem; font-weight: 500; color: var(--hero-ink-2); }
-.status {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 5px 12px 5px 10px; border-radius: 999px; font-size: .85rem; font-weight: 500;
-  background: rgba(255, 255, 255, .86); color: var(--ink); border: 0;
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  font-variant-numeric: tabular-nums;
-}
-.status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-2); }
-.status[data-open="true"] .status-dot { background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--river) 45%, transparent); }
-.hero h1 { font-size: clamp(3.4rem, 10.5vw, 7.6rem); line-height: .92; letter-spacing: -.01em; }
-.h1-kicker {
-  display: block; margin-bottom: 14px;
-  font-family: var(--font-body); font-size: clamp(.85rem, 1.4vw, 1rem); font-weight: 700;
-  letter-spacing: .24em; text-transform: uppercase; color: var(--hero-accent);
-}
-.lead { max-width: 38ch; font-size: clamp(1.1rem, 1.7vw, 1.3rem); line-height: 1.5; color: var(--hero-ink-2); }
-.hero .btn-ghost { color: var(--hero-ink); background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .22); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-.hero .btn-ghost:hover { background: rgba(255, 255, 255, .24); border-color: rgba(255, 255, 255, .32); }
-.actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.hero-scene { height: clamp(230px, 34vw, 440px); }
-
-/* intro */
-.intro-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(28px, 6vw, 88px); align-items: start; }
-.intro-quote { font-family: var(--font-display); font-size: clamp(1.7rem, 3.4vw, 2.6rem); line-height: 1.22; text-wrap: balance; }
-.intro-body { display: grid; gap: 16px; max-width: 60ch; color: var(--ink-2); }
-.signature { color: var(--ink); font-family: var(--font-display); font-size: 1.2rem; }
-@media (max-width: 820px) { .intro-grid { grid-template-columns: 1fr; } }
-
-/* menu */
-.menu { background: var(--surface-2); }
-.daily {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 24px;
-  padding: 20px clamp(18px, 3vw, 28px); margin-bottom: clamp(40px, 6vw, 64px);
-  background: var(--board); color: var(--on-deep); border-radius: var(--radius);
-}
-.daily-title { font-family: var(--font-display); font-size: 1.45rem; color: #FFFFFF; }
-.daily-when { flex: 1 1 260px; font-size: .95rem; }
-.daily-price { font-family: var(--font-display); font-size: 1.45rem; color: #FFFFFF; font-variant-numeric: tabular-nums; }
-.menu-card {
-  padding: clamp(20px, 4vw, 48px); background: var(--surface); border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .08), 0 2px 4px -2px rgba(0, 0, 0, .06);
-}
-.menu-cols { columns: 2 340px; column-gap: clamp(40px, 6vw, 88px); }
-.menu-cat { break-inside: avoid; padding-bottom: 44px; }
-.menu-cat h3 { font-size: 1.6rem; padding-bottom: 10px; border-bottom: 1.5px solid var(--ink); }
-.dishes { list-style: none; padding: 0; }
-.dish { padding-block: 14px; border-bottom: 1px solid var(--rule); }
-.dish:last-child { border-bottom: 0; }
-.dish-head { display: flex; align-items: baseline; gap: 10px; }
-.dish-name { font-family: var(--font-body); font-size: 1.06rem; font-weight: 700; line-height: 1.35; }
-.leader { flex: 1 1 auto; min-width: 16px; border-bottom: 2px dotted var(--rule); transform: translateY(-4px); }
-.price { white-space: nowrap; font-weight: 500; font-variant-numeric: tabular-nums; }
-.vol { color: var(--ink-2); font-weight: 400; margin-right: 10px; }
-.dish-desc { margin-top: 3px; max-width: 52ch; font-size: .95rem; color: var(--ink-2); }
-.alg {
-  display: inline-block; margin-left: 4px; padding: 0 6px; border: 1px solid var(--rule); border-radius: 4px;
-  font-size: .72rem; letter-spacing: .04em; line-height: 1.5; white-space: nowrap; vertical-align: 1px;
-  font-variant-numeric: tabular-nums;
-}
-.veg {
-  display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 4px; vertical-align: 2px;
-  font-size: .68rem; font-weight: 700; line-height: 1.6; background: var(--veg-bg); color: var(--veg-ink);
-}
-.dish-special { margin-inline: -14px; padding-inline: 14px; border-radius: var(--radius); border-bottom-color: transparent; background: var(--special-bg); }
-.badge { display: block; margin-bottom: 4px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--tertiary); }
-.menu-legend { margin-top: 4px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: .88rem; color: var(--ink-2); max-width: 90ch; }
-
-/* sources along the river */
-.source-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
-.source-grid .section-head { position: sticky; top: 100px; margin-bottom: 0; }
-@media (max-width: 860px) {
-  .source-grid { grid-template-columns: 1fr; }
-  .source-grid .section-head { position: static; }
-}
-.river-wrap { display: grid; gap: 26px; }
-.river-cap { padding-left: 48px; font-size: .85rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.river { position: relative; list-style: none; padding: 0 0 0 48px; display: grid; gap: 34px; }
-.river::before {
-  content: ""; position: absolute; left: 13px; top: -26px; bottom: -26px; width: 6px; border-radius: 6px;
-  background: linear-gradient(to bottom, color-mix(in srgb, var(--river) 25%, transparent), var(--river) 18%, var(--river-deep));
-}
-.stop { position: relative; display: grid; gap: 4px; }
-.stop::before {
-  content: ""; position: absolute; left: -41px; top: 2px; width: 18px; height: 18px; border-radius: 50%;
-  background: var(--bg); border: 3px solid var(--river-deep);
-}
-.stop-place { font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
-.stop-what { font-family: var(--font-display); font-size: 1.6rem; line-height: 1.15; }
-.stop-note { max-width: 46ch; color: var(--ink-2); }
-.stop-here::before { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent); }
-.here {
-  justify-self: start; margin-top: 4px; padding: 2px 10px; border-radius: 999px;
-  font-size: .75rem; font-weight: 700; letter-spacing: .06em; background: var(--accent); color: var(--accent-ink);
-}
-
-/* visit */
-.visit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px); }
-@media (max-width: 960px) {
-  .visit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .visit-block:last-child { grid-column: 1 / -1; }
-}
-@media (max-width: 640px) { .visit-grid { grid-template-columns: 1fr; } }
-.visit-block { display: grid; gap: 14px; align-content: start; padding: clamp(20px, 3vw, 28px); background: var(--surface-2); border-radius: 12px; box-shadow: 0 1px 2px rgba(0, 0, 0, .05); }
-.visit-block h3 { font-size: 1.45rem; padding-bottom: 10px; border-bottom: 1.5px solid var(--ink); }
-.table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-.table th, .table td { padding: 9px 0; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
-.table th { text-align: left; font-weight: 400; }
-.table td { text-align: right; white-space: nowrap; }
-.table tr.is-closed td { color: var(--ink-2); }
-.today-tag { display: none; margin-left: 8px; padding: 1px 8px; border-radius: 999px; font-size: .72rem; font-weight: 700; background: var(--accent); color: var(--accent-ink); }
-.table tr.is-today th, .table tr.is-today td { font-weight: 700; }
-.table tr.is-today .today-tag { display: inline-block; }
-.note { font-size: .9rem; color: var(--ink-2); }
-address { font-style: normal; line-height: 1.55; }
-.phone { font-weight: 700; font-variant-numeric: tabular-nums; }
-.phone a { color: inherit; text-decoration: none; }
-.coords { font-size: .85rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.facts { list-style: none; padding: 0; display: grid; gap: 12px; }
-.facts li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 12px; align-items: start; }
-.fact-dot { justify-self: center; width: 8px; height: 8px; margin-top: .6em; border-radius: 50%; background: var(--accent); }
-.fact-mark { margin-top: .25em; }
-
-/* reservation */
-.reserve { background: var(--surface-2); }
-.reserve-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
-@media (max-width: 860px) { .reserve-grid { grid-template-columns: 1fr; } }
-.reserve-grid .section-head { margin-bottom: 0; }
-.call { display: grid; gap: 2px; margin-top: 8px; }
-.call-label { font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
-.call-number { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 1.9rem); font-variant-numeric: tabular-nums; user-select: all; }
-.form {
-  display: grid; gap: 18px; padding: clamp(20px, 3vw, 32px);
-  background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
-  box-shadow: 0 22px 44px -30px color-mix(in srgb, var(--ink) 45%, transparent);
-}
-.form-fields { display: grid; gap: 18px; }
-.field { display: grid; gap: 6px; min-width: 0; }
-.field label { font-size: .85rem; font-weight: 700; }
-.field input, .field select, .field textarea {
-  width: 100%; min-width: 0; padding: 11px 12px;
-  font: inherit; font-size: 1rem; color: var(--ink);
-  background: var(--bg); border: 1.5px solid var(--rule); border-radius: var(--radius);
-}
-.field textarea { resize: vertical; min-height: 88px; }
-.field input:focus, .field select:focus, .field textarea:focus {
-  outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
-}
-.row-3 { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
-@media (max-width: 520px) {
-  .row-3 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .row-3 .field:first-child { grid-column: 1 / -1; }
-}
-.check { display: flex; align-items: center; gap: 10px; font-size: .95rem; }
-.check input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); }
-.form-error { color: var(--err); font-weight: 500; font-size: .95rem; }
-.form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
-.form-hint { font-size: .85rem; color: var(--ink-2); }
-.form-done { display: grid; gap: 14px; }
-.form-done h3 { font-size: 1.8rem; }
-.form-done h3:focus { outline: none; }
-.summary { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 18px; padding: 16px 0; border-block: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
-.summary dt { color: var(--ink-2); }
-.summary dd { font-weight: 500; }
-
-/* footer */
-.site-footer { padding-block: 48px; background: var(--surface-2); color: var(--ink); border-top: 1px solid var(--surface-3); }
-.footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 48px; }
-.footer-brand { font-family: var(--font-display); font-size: 2rem; color: var(--ink); }
-.footer-info { font-size: .95rem; font-variant-numeric: tabular-nums; }
-.demo-note { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: .85rem; color: var(--ink-2); }
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .btn { transition: none; }
-}
-</style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restavracija Soča | Emerald Waters Gastronomy</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+html{scroll-padding-top:5rem;scroll-behavior:smooth;}
+body{background-color:#f8f9ff;color:#0b1c30;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:24px;-webkit-font-smoothing:antialiased;}
+header.fixed{padding-top:env(safe-area-inset-top,0px);}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}.animate-ping{animation:none!important;}}</style>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+/* If a photo can't load (blocked host, expired link), show a drawn stand-in instead of a broken image. */
+(function () {
+  var sceneOn = false;
+  function drawScene() {
+    var c = document.getElementById("heroScene");
+    if (!c || !c.getContext) return;
+    var W = c.clientWidth, H = c.clientHeight, d = Math.min(window.devicePixelRatio || 1, 2);
+    if (!W || !H) return;
+    c.width = Math.round(W * d); c.height = Math.round(H * d);
+    var g = c.getContext("2d"); g.setTransform(d, 0, 0, d, 0, 0);
+    var seed = 1962;
+    function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    var v = []; for (var i = 0; i < 512; i++) v.push(rnd());
+    function n1(x) { var i = Math.floor(x), f = x - i, t = f * f * (3 - 2 * f), a = v[(i % 512 + 512) % 512], b = v[((i + 1) % 512 + 512) % 512]; return a + (b - a) * t; }
+    function fbm(x, o, s) { var r = 0, amp = 1, fr = 1, nm = 0; for (var k = 0; k < o; k++) { r += amp * n1(x * fr + s); nm += amp; amp *= .5; fr *= 2.07; } return r / nm; }
+    var S = H * 0.62, top = H - S;
+    var sky = g.createLinearGradient(0, 0, 0, top + S * .5);
+    sky.addColorStop(0, "#8fb8e0"); sky.addColorStop(1, "#dce9ff");
+    g.fillStyle = sky; g.fillRect(0, 0, W, H);
+    var x0 = W * 0.6;
+    var layers = [
+      [0.00, 0.58, 230, 5, 1.5, "#b9c7e0", 11, .25], [0.16, 0.66, 180, 5, 1.25, "#7d8ea6", 23, .45],
+      [0.34, 0.76, 150, 4, 1.1, "#4f6b64", 37, .7], [0.50, 0.80, 260, 3, 1, "#2f5249", 53, .8]
+    ];
+    layers.forEach(function (L, idx) {
+      var pts = [], lo = 1, hi = 0;
+      for (var x = -3; x <= W + 3; x += 3) { var q = fbm(x / L[2], L[3], L[6] * 13); pts.push([x, q]); lo = Math.min(lo, q); hi = Math.max(hi, q); }
+      var yT = top + S * L[0], yB = top + S * L[1], minY = H;
+      pts.forEach(function (p) { var q = Math.pow((p[1] - lo) / (hi - lo || 1), L[4]), dd = (p[0] - x0) / (W * .13); q *= 1 - L[7] * Math.exp(-dd * dd); p[1] = yB - (yB - yT) * q; minY = Math.min(minY, p[1]); });
+      if (idx === 0) { var sg = g.createLinearGradient(0, minY, 0, minY + (yB - minY) * .45); sg.addColorStop(0, "#ffffff"); sg.addColorStop(.38, "#ffffff"); sg.addColorStop(1, L[5]); g.fillStyle = sg; } else g.fillStyle = L[5];
+      g.beginPath(); g.moveTo(pts[0][0], H); pts.forEach(function (p) { g.lineTo(p[0], p[1]); }); g.lineTo(W + 3, H); g.closePath(); g.fill();
+    });
+    var fl = top + S * .7;
+    g.fillStyle = "#3f6b52"; g.fillRect(0, fl, W, H - fl);
+    function rx(t) { return x0 + W * .08 * t + W * .1 * Math.sin(t * Math.PI * 1.6); }
+    function ry(t) { return fl + (H + 4 - fl) * Math.pow(t, 1.7); }
+    function rw(t) { return 2 + Math.min(W * .3, 380) * Math.pow(t, 1.7); }
+    function ribbon(sc, ex, fill) { g.fillStyle = fill; g.beginPath(); var R = []; for (var k = 0; k <= 90; k++) { var t = k / 90, hw = rw(t) * sc / 2 + ex * t; if (k) g.lineTo(rx(t) - hw, ry(t)); else g.moveTo(rx(t) - hw, ry(t)); R.push([rx(t) + hw, ry(t)]); } for (var j = R.length - 1; j >= 0; j--) g.lineTo(R[j][0], R[j][1]); g.closePath(); g.fill(); }
+    ribbon(1.5, 6, "#e8ecef");
+    var w = g.createLinearGradient(0, fl, 0, H); w.addColorStop(0, "#6bd8cb"); w.addColorStop(1, "#008378");
+    ribbon(1, 0, w);
+    var bx = rx(.66), by = ry(.66) - 2, sp = rw(.66) * .75 + 10, tw = Math.max(13, S * .07);
+    g.strokeStyle = "#5a4632"; g.lineWidth = 1.6; g.lineCap = "round";
+    g.beginPath(); g.moveTo(bx - sp, by + 3); g.lineTo(bx - sp, by - tw); g.moveTo(bx + sp, by + 3); g.lineTo(bx + sp, by - tw);
+    g.moveTo(bx - sp, by - tw); g.quadraticCurveTo(bx, by + tw - 6, bx + sp, by - tw); g.stroke();
+    g.lineWidth = 2; g.beginPath(); g.moveTo(bx - sp, by); g.quadraticCurveTo(bx, by + 5, bx + sp, by); g.stroke();
+    function tree(x, y, h) { g.beginPath(); for (var k = 0; k < 4; k++) { var a = y - h + k * h * .2, b = a + h * .42, hw = h * (.12 + k * .055); g.moveTo(x, a); g.lineTo(x + hw, b); g.lineTo(x - hw, b); g.closePath(); } g.fill(); }
+    g.fillStyle = "#1f3c34";
+    tree(W * .95, H + 4, S * .42); tree(W * .88, H + 6, S * .3); tree(W * .78, H + 8, S * .22);
+  }
+  window.addEventListener("error", function (e) {
+    var img = e.target;
+    if (!img || img.tagName !== "IMG") return;
+    if (img.hasAttribute("data-scene")) {
+      img.style.display = "none"; sceneOn = true;
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", drawScene); else drawScene();
+      return;
+    }
+    var small = img.hasAttribute("data-logo");
+    var d = document.createElement("div");
+    d.className = img.className;
+    d.setAttribute("role", "img");
+    d.setAttribute("aria-label", small ? "Restavracija Soča" : img.alt);
+    d.style.cssText = "display:flex;align-items:center;justify-content:center;color:rgba(244,255,252,.85);background:linear-gradient(135deg,#008378,#00685f 55%,#005049);" + (small ? "width:32px;height:32px;border-radius:8px;" : "");
+    d.innerHTML = '<span class="material-symbols-outlined" style="font-size:' + (small ? 20 : 56) + 'px">' + (img.getAttribute("data-icon") || "restaurant") + "</span>";
+    img.replaceWith(d);
+  }, true);
+  window.addEventListener("resize", function () { if (sceneOn) drawScene(); });
+})();
+</script>
 </head>
-<body>
-
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="#top" aria-label="Gostilna Pri Brvi">
-      <svg width="30" height="18" viewBox="0 0 30 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-        <path d="M4 2v14M26 2v14"/>
-        <path d="M4 3Q15 15 26 3"/>
-        <path d="M4 14Q15 16 26 14"/>
-        <path d="M9.5 8.2v6.3M15 10v5M20.5 8.2v6.3" stroke-width="1.2"/>
-      </svg>
-      Pri Brvi
-    </a>
-    <nav class="nav" aria-label="Glavna navigacija">
-      <a href="#jedilnik"><span lang="sl">Jedilnik</span><span lang="en">Menu</span></a>
-      <a href="#izvor"><span lang="sl">Sestavine</span><span lang="en">Sources</span></a>
-      <a href="#obisk"><span lang="sl">Obisk</span><span lang="en">Visit</span></a>
-    </nav>
-    <div class="lang" role="group" aria-label="Jezik / Language">
-      <button type="button" id="lang-sl" data-set-lang="sl" aria-pressed="true">SL</button>
-      <button type="button" id="lang-en" data-set-lang="en" aria-pressed="false">EN</button>
-    </div>
-    <a class="btn btn-primary btn-sm header-cta" href="#rezervacija"><span lang="sl">Rezerviraj</span><span lang="en">Book</span></a>
-  </div>
-</header>
-
-<main>
-  <section class="hero" id="top" aria-labelledby="hero-title">
-    <canvas class="hero-canvas" id="scene" aria-hidden="true"></canvas>
-    <div class="wrap hero-copy">
-      <div class="hero-meta">
-        <span class="status" id="status" data-open="false">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span id="status-text"><span lang="sl">Torek–nedelja od 11:00</span><span lang="en">Tuesday–Sunday from 11:00</span></span>
-        </span>
-        <span><span lang="sl">Čezsoča pri Bovcu · od leta 1962</span><span lang="en">Čezsoča near Bovec · since 1962</span></span>
-      </div>
-      <h1 id="hero-title"><span class="h1-kicker">Gostilna</span>Pri Brvi</h1>
-      <p class="lead">
-        <span lang="sl">Domača kuhinja zgornjega Posočja. Soška postrv, frika in bovški krafi, dve minuti hoje od viseče brvi čez Sočo.</span>
-        <span lang="en">Home cooking from the upper Soča valley. Trout, frika and Bovec krafi, a two-minute walk from the suspension footbridge over the Soča.</span>
-      </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#rezervacija"><span lang="sl">Rezerviraj mizo</span><span lang="en">Book a table</span></a>
-        <a class="btn btn-ghost" href="#jedilnik"><span lang="sl">Poglej jedilnik</span><span lang="en">See the menu</span></a>
-      </div>
-    </div>
-    <div class="hero-scene" aria-hidden="true"></div>
-  </section>
-
-  <section class="section intro" id="o-nas" aria-label="O nas">
-    <div class="wrap intro-grid">
-      <p class="intro-quote">
-        <span lang="sl">Tri generacije, ena brv in recept za krafe, ki ga nona nikoli ni zapisala.</span>
-        <span lang="en">Three generations, one footbridge, and a krafi recipe Nona never wrote down.</span>
-      </p>
-      <div class="intro-body">
-        <p lang="sl">Nona Marija je leta 1962 v hiši ob brvi začela kuhati za drvarje, ki so hodili čez Sočo v gozd. Danes v kuhinji stoji njen vnuk Luka, goste pa sprejema Ana.</p>
-        <p lang="en">In 1962 Nona Marija started cooking for the woodcutters who crossed the Soča to work in the forest. Today her grandson Luka runs the kitchen and Ana looks after the guests.</p>
-        <p lang="sl">Kuhamo preprosto in po sezoni. Postrv pride zjutraj, sir s planin, jurčke naberemo sami. Kar ni iz naše doline, je iz sosednje.</p>
-        <p lang="en">We cook simply and with the seasons. The trout arrives in the morning, the cheese comes down from the mountain pastures, and we pick the porcini ourselves. What isn't from our valley is from the next one.</p>
-        <p class="signature">Luka &amp; Ana</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section menu" id="jedilnik" aria-labelledby="menu-title">
-    <div class="wrap">
-      <header class="section-head">
-        <p class="eyebrow"><span lang="sl">Jesen 2026</span><span lang="en">Autumn 2026</span></p>
-        <h2 id="menu-title"><span lang="sl">Jedilnik</span><span lang="en">Menu</span></h2>
-        <p>
-          <span lang="sl">Jeseni kuhamo z jurčki, divjačino in prvimi suhimi hruškami. Jedilnik se menja s sezono, jedi dneva so napisane na tabli pri vhodu.</span>
-          <span lang="en">In autumn we cook with porcini, game and the first dried pears. The menu changes with the seasons, and the dishes of the day are chalked on the board by the door.</span>
-        </p>
-      </header>
-
-      <div class="daily">
-        <p class="daily-title"><span lang="sl">Dnevno kosilo</span><span lang="en">Lunch of the day</span></p>
-        <p class="daily-when">
-          <span lang="sl">Torek–petek, 11:30–15:00 · juha, glavna jed in solata</span>
-          <span lang="en">Tuesday–Friday, 11:30–15:00 · soup, main course and salad</span>
-        </p>
-        <p class="daily-price">12,90&nbsp;€</p>
-      </div>
-
-      <div class="menu-card">
-      <div class="menu-cols">
-        <section class="menu-cat" aria-labelledby="cat-1">
-          <h3 id="cat-1"><span lang="sl">Predjedi</span><span lang="en">Starters</span></h3>
-          <ul class="dishes">
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Plošča s planine</h4><span class="leader" aria-hidden="true"></span><span class="price">13,50&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Tolminc, bovški ovčji sir, domača salama in zaseka, kruh iz krušne peči.</span><span lang="en">Tolminc and Bovec sheep's cheese, house salami and zaseka lard spread, bread from the wood oven.</span> <span class="alg">1, 7</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Dimljena postrv</h4><span class="leader" aria-hidden="true"></span><span class="price">10,90&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Hladno dimljen file, hren s smetano, kislo jabolko.</span><span lang="en">Cold-smoked fillet, horseradish cream, tart apple.</span> <span class="alg">4, 7</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Frika<span class="veg">V</span></h4><span class="leader" aria-hidden="true"></span><span class="price">9,80&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Nariban krompir in mlad sir, zapečena v ponvi do hrustljave skorje.</span><span lang="en">Grated potato and young cheese, pan-fried to a crisp crust.</span> <span class="alg">7</span></p>
-            </li>
-          </ul>
-        </section>
-
-        <section class="menu-cat" aria-labelledby="cat-2">
-          <h3 id="cat-2"><span lang="sl">Juhe</span><span lang="en">Soups</span></h3>
-          <ul class="dishes">
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Gobova juha z jurčki<span class="veg">V</span></h4><span class="leader" aria-hidden="true"></span><span class="price">6,90&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Jurčki iz bližnjih gozdov, ajdova kaša.</span><span lang="en">Porcini from the nearby woods, buckwheat groats.</span> <span class="alg">7, 9</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Ričet</h4><span class="leader" aria-hidden="true"></span><span class="price">6,50&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Ječmen, fižol in prekajeno rebrce, kuhano počasi.</span><span lang="en">Barley, beans and smoked pork rib, slow-cooked.</span> <span class="alg">1, 9</span></p>
-            </li>
-          </ul>
-        </section>
-
-        <section class="menu-cat" aria-labelledby="cat-3">
-          <h3 id="cat-3"><span lang="sl">Glavne jedi</span><span lang="en">Mains</span></h3>
-          <ul class="dishes">
-            <li class="dish dish-special">
-              <span class="badge"><span lang="sl">Hišna specialiteta</span><span lang="en">House speciality</span></span>
-              <div class="dish-head"><h4 class="dish-name">Bovški krafi<span class="veg">V</span></h4><span class="leader" aria-hidden="true"></span><span class="price">13,90&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Testo s suhimi hruškami, orehi in rozinami, zabeljeno z maslom in drobtinami. Po noninem receptu.</span><span lang="en">Pasta parcels filled with dried pears, walnuts and raisins, finished with butter and breadcrumbs. Nona's recipe.</span> <span class="alg">1, 3, 7, 8</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Soška postrv na maslu</h4><span class="leader" aria-hidden="true"></span><span class="price">18,50&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Cela postrv z žajbljem, krompir z blitvo.</span><span lang="en">Whole trout with sage, potatoes with chard.</span> <span class="alg">4, 7</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Srnin golaž s polento</h4><span class="leader" aria-hidden="true"></span><span class="price">17,50&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Srnjad iz okoliških gozdov, mehka polenta.</span><span lang="en">Venison from the surrounding forests, soft polenta.</span> <span class="alg">1, 9</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Jagnjetina iz krušne peči</h4><span class="leader" aria-hidden="true"></span><span class="price">22,00&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Bovška jagnjetina, pečen krompir, rožmarin.</span><span lang="en">Bovec lamb, roast potatoes, rosemary.</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Polenta s tolmincem in jurčki<span class="veg">V</span></h4><span class="leader" aria-hidden="true"></span><span class="price">14,20&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Pečena polenta, jurčki v omaki, nastrgan tolminc.</span><span lang="en">Grilled polenta, porcini sauce, grated Tolminc.</span> <span class="alg">7</span></p>
-            </li>
-          </ul>
-        </section>
-
-        <section class="menu-cat" aria-labelledby="cat-4">
-          <h3 id="cat-4"><span lang="sl">Sladice</span><span lang="en">Desserts</span></h3>
-          <ul class="dishes">
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Kobariški štruklji<span class="veg">V</span></h4><span class="leader" aria-hidden="true"></span><span class="price">6,90&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Kuhani štruklji z orehovim nadevom, zabeljeni z maslom.</span><span lang="en">Boiled rolled dumplings with walnut filling, finished with butter.</span> <span class="alg">1, 3, 7, 8</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Skutni zavitek z borovnicami<span class="veg">V</span></h4><span class="leader" aria-hidden="true"></span><span class="price">5,90&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Vlečeno testo, skuta, gozdne borovnice.</span><span lang="en">Pulled pastry, curd cheese, wild blueberries.</span> <span class="alg">1, 3, 7</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Sladoled iz ovčjega mleka<span class="veg">V</span></h4><span class="leader" aria-hidden="true"></span><span class="price">5,20&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Z ajdovim medom.</span><span lang="en">With buckwheat honey.</span> <span class="alg">3, 7</span></p>
-            </li>
-          </ul>
-        </section>
-
-        <section class="menu-cat" aria-labelledby="cat-5">
-          <h3 id="cat-5"><span lang="sl">Pijače</span><span lang="en">Drinks</span></h3>
-          <ul class="dishes">
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Rebula, Goriška Brda</h4><span class="leader" aria-hidden="true"></span><span class="price"><span class="vol">0,1&nbsp;l</span>2,80&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Suho belo vino, steklenica 0,75 l za 24,00 €.</span><span lang="en">Dry white, or 24.00 € for a 0.75 l bottle.</span> <span class="alg">12</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Merlot, Goriška Brda</h4><span class="leader" aria-hidden="true"></span><span class="price"><span class="vol">0,1&nbsp;l</span>3,00&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Rdeče vino iz vinogradov nad spodnjo Sočo.</span><span lang="en">Red wine from the vineyards above the lower Soča.</span> <span class="alg">12</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Svetlo pivo</h4><span class="leader" aria-hidden="true"></span><span class="price"><span class="vol">0,5&nbsp;l</span>4,20&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Iz male pivovarne v dolini.</span><span lang="en">From a small brewery down the valley.</span> <span class="alg">1</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Bezgov sok</h4><span class="leader" aria-hidden="true"></span><span class="price"><span class="vol">0,2&nbsp;l</span>2,50&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Domač sirup iz bezgovih cvetov z vodo.</span><span lang="en">House-made elderflower cordial with water.</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name">Borovničevec</h4><span class="leader" aria-hidden="true"></span><span class="price"><span class="vol">0,03&nbsp;l</span>3,00&nbsp;€</span></div>
-              <p class="dish-desc"><span lang="sl">Domači liker iz gozdnih borovnic.</span><span lang="en">House liqueur made from wild blueberries.</span></p>
-            </li>
-            <li class="dish">
-              <div class="dish-head"><h4 class="dish-name"><span lang="sl">Voda iz pipe</span><span lang="en">Tap water</span></h4><span class="leader" aria-hidden="true"></span><span class="price"><span lang="sl">brezplačno</span><span lang="en">free</span></span></div>
-              <p class="dish-desc"><span lang="sl">Hladna, iz gorskega zajetja. Vrč prinesemo k vsaki mizi.</span><span lang="en">Cold, from a mountain spring. We bring a jug to every table.</span></p>
-            </li>
-          </ul>
-        </section>
-      </div>
-
-      <p class="menu-legend">
-        <span lang="sl">Alergeni: 1 gluten · 3 jajca · 4 ribe · 7 mleko · 8 oreški · 9 listna zelena · 12 sulfiti. V pomeni brez mesa. Cene vključujejo DDV.</span>
-        <span lang="en">Allergens: 1 gluten · 3 eggs · 4 fish · 7 milk · 8 nuts · 9 celery · 12 sulphites. V means vegetarian. Prices include VAT.</span>
-      </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section source" id="izvor" aria-labelledby="source-title">
-    <div class="wrap source-grid">
-      <header class="section-head">
-        <p class="eyebrow"><span lang="sl">Od izvira do krožnika</span><span lang="en">From source to plate</span></p>
-        <h2 id="source-title"><span lang="sl">Dolina na krožniku</span><span lang="en">The valley on your plate</span></h2>
-        <p>
-          <span lang="sl">Soča izvira v Trenti in teče mimo naše hiše proti morju. Večino sestavin dobimo ob njenem toku, od rejcev in pridelovalcev, ki jih poznamo po imenu.</span>
-          <span lang="en">The Soča rises in Trenta and flows past our house on its way to the sea. Most of what we cook comes from along its course, from farmers and makers we know by name.</span>
-        </p>
-      </header>
-
-      <div class="river-wrap">
-        <p class="river-cap"><span lang="sl">Izvir Soče, Trenta</span><span lang="en">Source of the Soča, Trenta</span></p>
-        <ol class="river">
-          <li class="stop">
-            <p class="stop-place">Trenta</p>
-            <p class="stop-what"><span lang="sl">Postrv</span><span lang="en">Trout</span></p>
-            <p class="stop-note"><span lang="sl">Iz hladne vode zgornje doline, v naši kuhinji še isto jutro.</span><span lang="en">From the cold water of the upper valley, in our kitchen the same morning.</span></p>
-          </li>
-          <li class="stop">
-            <p class="stop-place">Bovec</p>
-            <p class="stop-what"><span lang="sl">Ovčji sir in jagnjetina</span><span lang="en">Sheep's cheese and lamb</span></p>
-            <p class="stop-note"><span lang="sl">Od rejcev bovške ovce, ki poleti pasejo na planinah pod Kaninom.</span><span lang="en">From farmers whose Bovec sheep graze the pastures below Mt Kanin in summer.</span></p>
-          </li>
-          <li class="stop stop-here">
-            <p class="stop-place">Čezsoča</p>
-            <p class="stop-what">Gostilna Pri Brvi</p>
-            <p class="stop-note"><span lang="sl">Vrt za hišo, orehi s starega drevesa in hruške, ki jih sušimo za krafe.</span><span lang="en">The garden behind the house, walnuts from the old tree, and pears we dry for krafi.</span></p>
-            <span class="here"><span lang="sl">Tukaj smo</span><span lang="en">We are here</span></span>
-          </li>
-          <li class="stop">
-            <p class="stop-place">Kobarid</p>
-            <p class="stop-what"><span lang="sl">Štruklji</span><span lang="en">Štruklji</span></p>
-            <p class="stop-note"><span lang="sl">Recept za kobariške štruklje smo dobili od sosedov.</span><span lang="en">Our štruklji follow the recipe of our neighbours in Kobarid.</span></p>
-          </li>
-          <li class="stop">
-            <p class="stop-place">Tolmin</p>
-            <p class="stop-what">Tolminc</p>
-            <p class="stop-note"><span lang="sl">Trdi sir z zaščiteno označbo porekla, zorjen najmanj 60 dni.</span><span lang="en">A hard cheese with protected designation of origin, aged at least 60 days.</span></p>
-          </li>
-          <li class="stop">
-            <p class="stop-place">Goriška Brda</p>
-            <p class="stop-what"><span lang="sl">Rebula in merlot</span><span lang="en">Rebula and merlot</span></p>
-            <p class="stop-note"><span lang="sl">Vina z gričev, kjer Soča zapusti gore.</span><span lang="en">Wines from the hills where the Soča leaves the mountains.</span></p>
-          </li>
-        </ol>
-        <p class="river-cap"><span lang="sl">Soča teče 138 km do Jadranskega morja.</span><span lang="en">The Soča runs 138 km to the Adriatic.</span></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section visit" id="obisk" aria-labelledby="visit-title">
-    <div class="wrap">
-      <header class="section-head">
-        <h2 id="visit-title"><span lang="sl">Obisk</span><span lang="en">Visit us</span></h2>
-      </header>
-      <div class="visit-grid">
-        <div class="visit-block">
-          <h3><span lang="sl">Odpiralni čas</span><span lang="en">Opening hours</span></h3>
-          <table class="table" id="hours">
-            <tr class="is-closed" data-days="1">
-              <th scope="row"><span lang="sl">Ponedeljek</span><span lang="en">Monday</span><span class="today-tag"><span lang="sl">danes</span><span lang="en">today</span></span></th>
-              <td><span lang="sl">zaprto</span><span lang="en">closed</span></td>
-            </tr>
-            <tr data-days="2,3,4">
-              <th scope="row"><span lang="sl">Torek–četrtek</span><span lang="en">Tuesday–Thursday</span><span class="today-tag"><span lang="sl">danes</span><span lang="en">today</span></span></th>
-              <td>11:00–22:00</td>
-            </tr>
-            <tr data-days="5,6">
-              <th scope="row"><span lang="sl">Petek, sobota</span><span lang="en">Friday, Saturday</span><span class="today-tag"><span lang="sl">danes</span><span lang="en">today</span></span></th>
-              <td>11:00–23:00</td>
-            </tr>
-            <tr data-days="0">
-              <th scope="row"><span lang="sl">Nedelja</span><span lang="en">Sunday</span><span class="today-tag"><span lang="sl">danes</span><span lang="en">today</span></span></th>
-              <td>11:00–21:00</td>
-            </tr>
-          </table>
-          <p class="note">
-            <span lang="sl">Kuhinja je odprta do ene ure pred zaprtjem. Od novembra do marca smo odprti od petka do nedelje.</span>
-            <span lang="en">The kitchen closes an hour before we do. From November to March we open Friday to Sunday.</span>
+<body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-[1360px] mx-auto px-margin-lg flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><img alt="Restavracija Soča" data-logo="" data-icon="water" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UMWyYtUsS3aen2ICpf0j5Kf-cQUYzXpKG1bAV-oT0XCCXygohCSfbhqJH_QK90t3PNr67pBbtso2CxdLv5LYlt99JoHVv4MC5-mJZKUEJLhknkA02_UKFoHJyOu_jVHAVppa1x73tHlqEGjbO9ro4_PE5iQZnz7PALHBvZc4yYRf1h9QsUE9eJ4aCZBTt1Erd30g5hccDz8HZgeXRlewmuPqizxXdzO-J4BbDKhQ8EVvpPK7MZCyx6860d"/><a class="flex flex-col" data-path="home" href="#top"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none">Restavracija Soča</span><span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-medium mt-1">Emerald Waters Gastronomy</span></a></div><nav class="hidden xl:flex items-center gap-space-md" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-full px-space-md py-space-xs"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-3 py-1.5" data-path="our-story" href="#o-nas">O nas</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-3 py-1.5" data-path="seasonal-tasting-menu" href="#degustacija">Jedilni list</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-3 py-1.5" data-path="alpine-terroir" href="#sestavine">Lokalne sestavine</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-3 py-1.5" data-path="wine-cellar" href="#vinska-klet">Vinska klet</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-3 py-1.5" data-path="ambiance-gallery" href="#galerija">Galerija</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container hover:text-on-primary-container rounded-full px-space-lg py-space-sm shadow-[0_4px_20px_-2px_rgba(13,148,136,0.2)] transition-all" data-path="table-reservation" href="#rezervacija">Rezervacija mize</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- HERO SECTION WITH ASYMMETRIC RIVER VALLEY CANVAS -->
+<section class="relative w-full -mt-20 overflow-hidden bg-surface-container-low" id="top">
+<div class="relative min-h-[92vh] flex items-center pt-28 pb-16">
+<!-- Background Ambient Scrim & Visual -->
+<div class="absolute inset-0 z-0">
+<canvas aria-hidden="true" class="absolute inset-0 w-full h-full" id="heroScene"></canvas>
+<img alt="Breathtaking wide view of the turquoise Soča river rapids cutting through Julian Alps limestone gorge with suspension wooden bridge and pristine alpine forest" data-scene="" class="relative w-full h-full object-cover object-center scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1VIFXRYoRglSAkIwu-96MyO7jgFHYzbIC8OvCl3L-IyaJGGOj6uuRSh9yNEPYwK4ZGiWMItr3fPC1veXSOgtLIfatG56xDyHtW601k_aH5z9Qjytb_PjXnLrqr9RxIeCcl6x4cXJYcR47T5kI3F9sONkhXfFQsdcDUhbUqsOwkWxkZ4fVFQtTbOZB6U6qaqnZHtoted9pCJ0VObwS7QtYw_ZNUydffyKmHfndISAd3jDZUsMgPoIOZsqvyC"/>
+<div class="absolute inset-0 bg-gradient-to-r from-on-surface/90 via-on-surface/75 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-on-surface/40"></div>
+</div>
+<!-- Hero Content -->
+<div class="relative z-10 max-w-[1360px] mx-auto px-margin-lg w-full">
+<div class="max-w-3xl space-y-space-lg">
+<!-- Hydro-Glass Live Telemetry Pill -->
+<div class="inline-flex max-w-full items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container-lowest/80 backdrop-blur-md shadow-sm">
+<span class="relative flex h-2.5 w-2.5 shrink-0">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-fixed-dim opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Današnji ulov &amp; sezonski meni:</span>
+<span class="min-w-[7rem] font-body-sm text-body-sm text-on-surface font-medium truncate">Soška postrv, sveži lisičke, bovški sir (18 mesecev)</span>
+</div>
+<!-- Main Headlines -->
+<div class="space-y-4">
+<span class="inline-block font-label-md text-label-md uppercase tracking-widest text-primary-fixed">Kobarid • Triglavski Narodni Park</span>
+<h1 class="font-display-hero text-display-hero-mobile sm:text-display-hero text-surface-container-lowest tracking-tight leading-[1.08]">
+              Kulinarično doživetje na smaragdnih brzicah
+            </h1>
+<p class="font-body-lg text-body-lg text-surface-variant max-w-2xl leading-relaxed">
+              Kjer se neukročeni alpski tokovi Soče prepletejo z avtohtono soško postrvjo, divjim nabiralništvom pod Krnom ter tisočletnim izročilom visokogorskih pašnikov.
+            </p>
+</div>
+<!-- Action Buttons & Badges -->
+<div class="flex flex-wrap items-center gap-space-md pt-space-xs">
+<a class="inline-flex items-center justify-center font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container hover:text-on-primary-container rounded-full px-8 py-3.5 shadow-lg shadow-primary/25 transition-all transform hover:-translate-y-0.5" href="#rezervacija">
+<span class="material-symbols-outlined text-[20px] mr-2">restaurant</span>
+              Rezervirajte mizo
+            </a>
+<a class="inline-flex items-center justify-center font-label-md text-label-md text-surface-container-lowest bg-surface-container-lowest/20 hover:bg-surface-container-lowest/30 backdrop-blur-md rounded-full px-8 py-3.5 transition-all" href="#degustacija">
+              Raziskujte menije
+              <span class="material-symbols-outlined text-[18px] ml-1.5">arrow_forward</span>
+</a>
+</div>
+<!-- Accolades Strip -->
+<div class="pt-space-lg flex flex-wrap items-center gap-6 text-surface-container-lowest/90 font-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>Michelin Guide Slovenia 2024</span>
+</div>
+<div class="h-3 w-px bg-surface-container-lowest/30"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-[20px]" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span>Gault &amp; Millau 3 Kape (16.5)</span>
+</div>
+<div class="h-3 w-px bg-surface-container-lowest/30"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">eco</span>
+<span>Slovenia Green Cuisine</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Terrace River Status Bar (Bottom overlay) -->
+<div class="absolute bottom-6 right-6 hidden lg:flex items-center gap-3 px-5 py-3 rounded-xl bg-surface-container-lowest/80 backdrop-blur-xl shadow-md z-10">
+<span class="material-symbols-outlined text-primary text-[22px]">waves</span>
+<div class="text-left">
+<p class="font-label-sm text-label-sm text-on-surface font-semibold">Pretok Soče: 14.8 m³/s • Kristalno čista</p>
+<p class="font-caption text-caption text-on-surface-variant">Panoramska terasa nad reko danes odprta</p>
+</div>
+</div>
+</div>
+</section>
+<!-- PHILOSOPHY & ALPINE TERROIR (EDITORIAL SPLIT) -->
+<section class="w-full py-space-xl bg-surface" id="o-nas">
+<div class="max-w-[1360px] mx-auto px-margin-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+<!-- Visual Column with Asymmetric Photo Stack -->
+<div class="lg:col-span-5 relative">
+<div class="rounded-xl overflow-hidden shadow-xl bg-surface-container">
+<img alt="Artisanally plated wild Marble Trout on dark slate stone with wild herbs and vibrant green emerald oil inside the restaurant dining room overlooking the Soča river" data-icon="set_meal" class="w-full h-[460px] object-cover hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQUkdgpewpE81t35QsyGFooFgfBMZclfY_43LiYqvOxgchAf6BDJPtXimoImmsVvc2B5xM-wEk6-atdurhjK_BfbkcXyNdme8wrmGhWXmroC8Zq3UFB0D_jqFwxLSehWAMsT4-81sKboVRibOrcdgt6I9aYiRlkDsx1RDgJqaSVzFPQcQRY0Rg-gu5qyWLVO94PddASGfMQyNH3Px_5Exg0g98aI4Ri2f3DRX57Lx8I7pGi6rDkmf_-g"/>
+</div>
+<div class="absolute -bottom-6 -right-6 hidden sm:block p-6 rounded-xl bg-surface-container-lowest shadow-xl max-w-xs">
+<p class="font-label-sm text-label-sm uppercase text-primary font-bold tracking-wider">Chef Marko Kranjc</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">
+              "Reka Soča ni le kulisa. Je naša glavna shramba, navdih in neizprosen kulinarični kompas."
+            </p>
+</div>
+</div>
+<!-- Editorial Text Column -->
+<div class="lg:col-span-7 space-y-space-md pl-0 lg:pl-space-lg">
+<div class="space-y-2">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Naša Filozofija</span>
+<h2 class="font-headline-xl text-headline-xl-mobile sm:text-headline-xl text-on-surface tracking-tight">
+              Sotočje surovega Krasa in ledeniške čistosti
+            </h2>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            V osrčju kobariškega kanjona ustvarjamo avtorsko kulinariko, zavezano ničnemu kilometru in globokemu spoštovanju do naravnega habitata Julijskih Alp. Vsak krožnik pripoveduje zgodbo strmih planin, divjih zelišč z roba gozda ter nepogrešljive kraljice naših voda – soške postrvi.
           </p>
-        </div>
-
-        <div class="visit-block">
-          <h3><span lang="sl">Kje smo</span><span lang="en">Find us</span></h3>
-          <address>
-            Gostilna Pri Brvi<br>
-            Čezsoča 14<br>
-            5230 Bovec
-          </address>
-          <p class="phone"><a href="tel:+38650000000">+386 5 000 00 00</a></p>
-          <p class="coords"><span lang="sl">46°19′ s. g. š., 13°34′ v. g. d.</span><span lang="en">46°19′ N, 13°34′ E</span></p>
-          <table class="table">
-            <tr><th scope="row">Bovec</th><td>3 km</td></tr>
-            <tr><th scope="row">Kobarid</th><td>19 km</td></tr>
-            <tr><th scope="row">Trenta</th><td>20 km</td></tr>
-            <tr><th scope="row">Tolmin</th><td>35 km</td></tr>
-          </table>
-          <p class="note"><span lang="sl">Razdalje po cesti, približno.</span><span lang="en">Approximate distances by road.</span> <a href="https://www.google.com/maps/search/?api=1&amp;query=%C4%8Cezso%C4%8Da%2C%20Bovec" target="_blank" rel="noopener"><span lang="sl">Odpri zemljevid</span><span lang="en">Open map</span> ↗</a></p>
-        </div>
-
-        <div class="visit-block">
-          <h3><span lang="sl">Dobro je vedeti</span><span lang="en">Good to know</span></h3>
-          <ul class="facts">
-            <li><span class="fact-dot" aria-hidden="true"></span><span><span lang="sl">Terasa ob Soči ima 40 sedežev, notri jih je še 60.</span><span lang="en">The riverside terrace seats 40, with 60 more seats inside.</span></span></li>
-            <li><span class="fact-dot" aria-hidden="true"></span><span><span lang="sl">Po raftingu ali kanjoningu pridite kar v športni opremi.</span><span lang="en">Come straight from rafting or canyoning, sports gear is fine.</span></span></li>
-            <li><span class="fact-dot" aria-hidden="true"></span><span><span lang="sl">Psi so dobrodošli na terasi. Skledo vode prinesemo.</span><span lang="en">Dogs are welcome on the terrace. We'll bring a water bowl.</span></span></li>
-            <li><span class="fact-dot" aria-hidden="true"></span><span><span lang="sl">Pokrito stojalo za kolesa je ob vhodu.</span><span lang="en">There's a covered bike rack by the entrance.</span></span></li>
-            <li>
-              <svg class="fact-mark" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8" fill="var(--marker)"/><circle cx="9" cy="9" r="3.4" fill="#FFFFFF"/></svg>
-              <span><span lang="sl">Markirana pešpot ob Soči vas pripelje v Bovec v približno 45 minutah.</span><span lang="en">A marked riverside footpath takes you to Bovec in about 45 minutes.</span></span>
-            </li>
-            <li><span class="fact-dot" aria-hidden="true"></span><span><span lang="sl">Plačate lahko z gotovino ali kartico.</span><span lang="en">We take cash and cards.</span></span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section reserve" id="rezervacija" aria-labelledby="reserve-title">
-    <div class="wrap reserve-grid">
-      <header class="section-head">
-        <p class="eyebrow"><span lang="sl">Rezervacija</span><span lang="en">Reservations</span></p>
-        <h2 id="reserve-title"><span lang="sl">Rezervirajte mizo</span><span lang="en">Book a table</span></h2>
-        <p>
-          <span lang="sl">Poleti so mize na terasi zvečer hitro zasedene, zato priporočamo rezervacijo vsaj dan prej. Za skupine nad 12 oseb nas pokličite.</span>
-          <span lang="en">Terrace tables go quickly on summer evenings, so book at least a day ahead. For groups of more than 12, please call us.</span>
+<!-- 3 Pillars Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-sm" id="sestavine">
+<div class="p-space-md rounded-xl bg-surface-container-low transition-all hover:bg-surface-container">
+<div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[22px]">water</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Divji rečni tokovi</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Avtohtona soška postrv (Salmo marmoratus), pridobljena izključno po strogih trajnostnih kvotah lokalnega ribiškega zavoda.
+              </p>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low transition-all hover:bg-surface-container">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[22px]">grass</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Planinsko sirarstvo</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Pristni sir Tolminc in Bovec iz surovega ovčjega mleka visokogorskih kmetij ter divja zelišča, nabrana v jutranji rosi.
+              </p>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low transition-all hover:bg-surface-container" id="vinska-klet">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[22px]">wine_bar</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Brda &amp; Vipava vina</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Biodinamične avtohtone sorte, macerirane Reboule ter jantarjeve kapljice iz glinenih amfor primorskih vinarjev.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SIGNATURE DEGUSTATION SHOWCASE -->
+<section class="w-full py-space-xl bg-surface-container-low" id="degustacija">
+<div class="max-w-[1360px] mx-auto px-margin-lg space-y-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="space-y-2">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Sezonska Doživetja</span>
+<h2 class="font-headline-xl text-headline-xl-mobile sm:text-headline-xl text-on-surface tracking-tight">Degustacijski Meniji</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+            Sestavljeni v ritmu letnih časov in dnevnega ulova. Na voljo z vinsko spremljavo ali brezalkoholno fermentacijsko harmonijo.
+          </p>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-3.5 py-1.5 rounded-full bg-surface text-on-surface font-label-sm text-label-sm shadow-sm">Vegetarijanski meni na voljo</span>
+<span class="px-3.5 py-1.5 rounded-full bg-surface text-on-surface font-label-sm text-label-sm shadow-sm">100% Brezglutenske prilagoditve</span>
+</div>
+</div>
+<!-- Degustation Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter-lg">
+<!-- 6-Hodni: Smaragdni tok -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-md flex flex-col justify-between hover:shadow-xl transition-all">
+<div class="relative h-64 overflow-hidden">
+<img alt="Marble trout with wild chanterelles and pine oil at Restavracija Soča" data-icon="set_meal" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQUkdgpewpE81t35QsyGFooFgfBMZclfY_43LiYqvOxgchAf6BDJPtXimoImmsVvc2B5xM-wEk6-atdurhjK_BfbkcXyNdme8wrmGhWXmroC8Zq3UFB0D_jqFwxLSehWAMsT4-81sKboVRibOrcdgt6I9aYiRlkDsx1RDgJqaSVzFPQcQRY0Rg-gu5qyWLVO94PddASGfMQyNH3Px_5Exg0g98aI4Ri2f3DRX57Lx8I7pGi6rDkmf_-g"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md font-label-sm text-label-sm text-primary font-bold">
+                6 Hodov • Rečni Fokus
+              </span>
+</div>
+<div class="absolute bottom-4 right-4 bg-on-surface/85 backdrop-blur-md px-3.5 py-1 rounded-full text-surface-container-lowest font-headline-sm text-headline-sm">
+              98 € <span class="font-caption text-caption text-surface-variant font-normal">/ osebo</span>
+</div>
+</div>
+<div class="p-space-lg space-y-space-md flex-1 flex flex-col justify-between">
+<div class="space-y-3">
+<div class="flex flex-wrap items-baseline justify-between gap-x-4">
+<h3 class="font-headline-lg text-headline-lg-mobile sm:text-headline-lg text-on-surface">Smaragdni tok</h3>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">+ 55 € Vinska spremljava</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Intenzivno popotovanje vzdolž struge Soče – od izvira v Trenti do brzic pod Kobaridom.
+              </p>
+<ul class="space-y-2.5 pt-2 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>Pozdrav iz vode:</strong> Kreker iz rečnih alg, dimljena postrvja ikra, kisla smetana</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>Glavna zvezda:</strong> File soške postrvi na maslu z lisičkami, borovo olje, krema pastinaka</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>Gorski pašnik:</strong> Mladi kozji sir s Tolminskega, emulzija divje mete, medena satovnica</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>Zaključek:</strong> Sorbet smrekovih vršičkov, hruška tepka v refošku</span>
+</li>
+</ul>
+</div>
+<div class="pt-space-md">
+<a class="w-full inline-flex items-center justify-center font-label-md text-label-md text-primary bg-surface-container hover:bg-primary hover:text-on-primary rounded-full py-3 transition-colors" data-menu="6" href="#rezervacija">
+                Izberite ta meni ob rezervaciji
+              </a>
+</div>
+</div>
+</div>
+<!-- 8-Hodni: Alpska dediščina -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-md flex flex-col justify-between hover:shadow-xl transition-all">
+<div class="relative h-64 overflow-hidden">
+<img alt="Traditional Bovec Krafi sweet pastry pockets with dried pears, honey and walnuts on rustic ceramic plate at warm fireplace salon" data-icon="bakery_dining" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo2KHL3OchgpzBSuLskCWbRFDbc16PkdGpaH13ud7-vUus5zTGz2Hmcjps6JVrifpLzbSqm034qhpQiFyYjdggPJhtlyclpL8zTL7SdywW2hMG7HeWDbzMunCe1gvReL2IhsNGNtkOBTC-sBj_0Xw33FCnLg68Mt7p1otsB5Kr8wRXoP-bGVyGvCEX0kLIi4ptXNWAJxvPiVRtmS7AGesxLJZMho8KcA9lkIGw9t__jS8Oiic6NpZCHQ"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md font-label-sm text-label-sm text-tertiary font-bold">
+                8 Hodov • Celotna Dediščina
+              </span>
+</div>
+<div class="absolute bottom-4 right-4 bg-on-surface/85 backdrop-blur-md px-3.5 py-1 rounded-full text-surface-container-lowest font-headline-sm text-headline-sm">
+              135 € <span class="font-caption text-caption text-surface-variant font-normal">/ osebo</span>
+</div>
+</div>
+<div class="p-space-lg space-y-space-md flex-1 flex flex-col justify-between">
+<div class="space-y-3">
+<div class="flex flex-wrap items-baseline justify-between gap-x-4">
+<h3 class="font-headline-lg text-headline-lg-mobile sm:text-headline-lg text-on-surface">Alpska dediščina</h3>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">+ 75 € Prestižna Primorska vina</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Najobsežnejša interpretacija kulinarike Zgornjega Posočja, divjačine, zorenega sira in starodavnih sladic.
+              </p>
+<ul class="space-y-2.5 pt-2 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>Gozdni uvod:</strong> Karpačo jelena izpod Krna, brinova krema, fermentiran čemaž</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>Ledeniška globina:</strong> Poširan postrvji hrbet v zeliščnem čaju z divjim timijanom</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>Visokogorje:</strong> Pečen jagnječji hrbet v skorjici lešnikov, buča, pire staranega sira Tolminc</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>Avtohtoni zaključek:</strong> Bovški krafi s suhimi hruškami, orehi, cimetovim medom in rjavim maslom</span>
+</li>
+</ul>
+</div>
+<div class="pt-space-md">
+<a class="w-full inline-flex items-center justify-center font-label-md text-label-md text-primary bg-surface-container hover:bg-primary hover:text-on-primary rounded-full py-3 transition-colors" data-menu="8" href="#rezervacija">
+                Izberite ta meni ob rezervaciji
+              </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ATMOSPHERIC RIVERSIDE TERRACE & DINING ROOMS -->
+<section class="w-full py-space-xl bg-surface" id="galerija">
+<div class="max-w-[1360px] mx-auto px-margin-lg space-y-space-lg">
+<div class="text-center max-w-2xl mx-auto space-y-2">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Ambient &amp; Prostori</span>
+<h2 class="font-headline-xl text-headline-xl-mobile sm:text-headline-xl text-on-surface tracking-tight">Kjer narava postane arhitektura</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Tri unikatna doživetja prostora – od odprte terase tik nad smaragdnimi brzicami do intimnega prasketanja ob kaminu.
         </p>
-        <div class="call">
-          <span class="call-label"><span lang="sl">Telefon</span><span lang="en">Phone</span></span>
-          <span class="call-number">+386 5 000 00 00</span>
-        </div>
-      </header>
-
-      <form class="form" id="reserve-form" novalidate>
-        <div class="form-fields" id="form-fields">
-          <div class="field">
-            <label for="r-name"><span lang="sl">Ime in priimek</span><span lang="en">Name</span></label>
-            <input id="r-name" name="name" type="text" autocomplete="name" required>
-          </div>
-          <div class="field">
-            <label for="r-contact"><span lang="sl">Telefon ali e-pošta</span><span lang="en">Phone or email</span></label>
-            <input id="r-contact" name="contact" type="text" autocomplete="tel" required>
-          </div>
-          <div class="row-3">
-            <div class="field">
-              <label for="r-date"><span lang="sl">Datum</span><span lang="en">Date</span></label>
-              <input id="r-date" name="date" type="date" required>
-            </div>
-            <div class="field">
-              <label for="r-time"><span lang="sl">Ura</span><span lang="en">Time</span></label>
-              <select id="r-time" name="time">
-                <option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option>
-                <option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option>
-                <option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option>
-                <option>17:30</option><option>18:00</option><option>18:30</option><option selected>19:00</option>
-                <option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option>
-                <option>21:30</option><option>22:00</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="r-guests"><span lang="sl">Oseb</span><span lang="en">Guests</span></label>
-              <select id="r-guests" name="guests">
-                <option>1</option><option selected>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option><option>7</option><option>8</option>
-                <option>9</option><option>10</option><option>11</option><option>12</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="r-note"><span lang="sl">Opombe</span><span lang="en">Notes</span></label>
-            <textarea id="r-note" name="note" rows="3" data-ph-sl="Otroški stolček, alergije, praznovanje …" data-ph-en="High chair, allergies, a celebration …" placeholder="Otroški stolček, alergije, praznovanje …"></textarea>
-          </div>
-          <label class="check" for="r-terrace">
-            <input id="r-terrace" name="terrace" type="checkbox" checked>
-            <span><span lang="sl">Miza na terasi, če bo lepo vreme</span><span lang="en">Terrace table if the weather is good</span></span>
-          </label>
-          <p class="form-error" id="form-error" role="alert" hidden></p>
-          <div class="form-foot">
-            <button class="btn btn-primary" type="submit"><span lang="sl">Pošlji povpraševanje</span><span lang="en">Send request</span></button>
-            <span class="form-hint"><span lang="sl">Mizo vam potrdimo po telefonu ali e-pošti.</span><span lang="en">We'll confirm your table by phone or email.</span></span>
-          </div>
-        </div>
-
-        <div class="form-done" id="form-done" hidden>
-          <h3 id="done-title" tabindex="-1"></h3>
-          <p id="done-text"></p>
-          <dl class="summary" id="done-summary"></dl>
-          <div><button class="btn btn-ghost" type="button" id="done-again"></button></div>
-        </div>
-      </form>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <p class="footer-brand">Pri Brvi</p>
-      <p class="footer-info">Čezsoča 14, 5230 Bovec · +386 5 000 00 00<br>
-        <span lang="sl">Tor–ned od 11:00, ob ponedeljkih zaprto</span><span lang="en">Tue–Sun from 11:00, closed Mondays</span>
-      </p>
-    </div>
-    <p class="demo-note">
-      <span lang="sl">Demo stran. Gostilna Pri Brvi je izmišljena, jedilnik, cene in kontakti so primeri. © 2026</span>
-      <span lang="en">Demo site. Gostilna Pri Brvi is fictional, and the menu, prices and contact details are examples. © 2026</span>
-    </p>
-  </div>
-</footer>
-
+</div>
+<!-- Bento-style Atmosphere Showcase -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-lg">
+<!-- Room 1 -->
+<div class="group rounded-xl overflow-hidden bg-surface-container-low shadow-sm hover:shadow-lg transition-all flex flex-col">
+<div class="relative h-64 overflow-hidden">
+<img alt="Open-air wooden terrace overlooking turquoise canyon of Soca river with Julian alps in background" data-icon="deck" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1VIFXRYoRglSAkIwu-96MyO7jgFHYzbIC8OvCl3L-IyaJGGOj6uuRSh9yNEPYwK4ZGiWMItr3fPC1veXSOgtLIfatG56xDyHtW601k_aH5z9Qjytb_PjXnLrqr9RxIeCcl6x4cXJYcR47T5kI3F9sONkhXfFQsdcDUhbUqsOwkWxkZ4fVFQtTbOZB6U6qaqnZHtoted9pCJ0VObwS7QtYw_ZNUydffyKmHfndISAd3jDZUsMgPoIOZsqvyC"/>
+<span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm">
+              Zunanja Terasa
+            </span>
+</div>
+<div class="p-space-md space-y-2 flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface">Panoramska terasa nad reko</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Mize nameščene neposredno nad kanjonom s pogledom na Triglavsko pogorje. Šumenje vode ustvarja naravno zvočno kuliso. Odprto od maja do oktobra ob lepem vremenu.
+            </p>
+</div>
+</div>
+<!-- Room 2 -->
+<div class="group rounded-xl overflow-hidden bg-surface-container-low shadow-sm hover:shadow-lg transition-all flex flex-col">
+<div class="relative h-64 overflow-hidden">
+<img alt="Warm restaurant interior with authentic stone fireplace and wooden tables" data-icon="fireplace" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo2KHL3OchgpzBSuLskCWbRFDbc16PkdGpaH13ud7-vUus5zTGz2Hmcjps6JVrifpLzbSqm034qhpQiFyYjdggPJhtlyclpL8zTL7SdywW2hMG7HeWDbzMunCe1gvReL2IhsNGNtkOBTC-sBj_0Xw33FCnLg68Mt7p1otsB5Kr8wRXoP-bGVyGvCEX0kLIi4ptXNWAJxvPiVRtmS7AGesxLJZMho8KcA9lkIGw9t__jS8Oiic6NpZCHQ"/>
+<span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm">
+              Celoletni Salon
+            </span>
+</div>
+<div class="p-space-md space-y-2 flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface">Kamin &amp; Kamnita dvorana</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Obzidana z lokalnim soškim apnencem in stoletnim macesnovim lesom. Odprt kamin z bukovimi drvmi nudi toplo zavetje ob svežih alpskih večerih.
+            </p>
+</div>
+</div>
+<!-- Room 3 -->
+<div class="group rounded-xl overflow-hidden bg-surface-container-low shadow-sm hover:shadow-lg transition-all flex flex-col">
+<div class="relative h-64 overflow-hidden">
+<img alt="Chefs plating gourmet dishes in modern alpine open kitchen" data-icon="skillet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQUkdgpewpE81t35QsyGFooFgfBMZclfY_43LiYqvOxgchAf6BDJPtXimoImmsVvc2B5xM-wEk6-atdurhjK_BfbkcXyNdme8wrmGhWXmroC8Zq3UFB0D_jqFwxLSehWAMsT4-81sKboVRibOrcdgt6I9aYiRlkDsx1RDgJqaSVzFPQcQRY0Rg-gu5qyWLVO94PddASGfMQyNH3Px_5Exg0g98aI4Ri2f3DRX57Lx8I7pGi6rDkmf_-g"/>
+<span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold">
+              Ekskluzivno (Max 8 oseb)
+            </span>
+</div>
+<div class="p-space-md space-y-2 flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface">Chef's Table ob odprti kuhinji</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Pogled iz prve vrste na precizno delo ekipe Chefa Marka Kranjca, vključno z neposredno razlago vsakega hoda in arhivskih vinskih letnikov.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ONLINE RESERVATION MODULE & VISIT DETAILS -->
+<section class="w-full py-space-xl bg-surface-container-low relative" id="rezervacija">
+<div class="max-w-[1360px] mx-auto px-margin-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg">
+<!-- Interactive Booking Form Container -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-lg">
+<div class="space-y-2 mb-space-lg">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Spletna Rezervacija</span>
+<h2 class="font-headline-lg text-headline-lg-mobile sm:text-headline-lg text-on-surface tracking-tight">Rezervirajte svoje doživetje</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Zaradi omejene kapacitete in priprave svežih sestavin priporočamo rezervacijo vsaj 3 dni vnaprej.
+            </p>
+</div>
+<form class="space-y-space-md" id="reservationForm">
+<!-- Row 1: Guests and Date -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="guests">
+<span class="material-symbols-outlined text-[16px] text-primary">group</span>
+                  Število gostov
+                </label>
+<select class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="guests">
+<option value="2">2 osebi (Intimna miza)</option>
+<option value="3">3 osebe</option>
+<option selected="" value="4">4 osebe</option>
+<option value="6">6 oseb</option>
+<option value="8">8 oseb (Chef's Table povpraševanje)</option>
+</select>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="resDate">
+<span class="material-symbols-outlined text-[16px] text-primary">calendar_today</span>
+                  Datum obiska
+                </label>
+<input class="w-full min-w-0 px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="resDate" type="date" value="2026-10-02"/>
+</div>
+</div>
+<!-- Row 2: Seating & Seating Preference -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="timeSlot">
+<span class="material-symbols-outlined text-[16px] text-primary">schedule</span>
+                  Termin postrežbe
+                </label>
+<select class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="timeSlot">
+<optgroup label="Kosilo (Sobota &amp; Nedelja)">
+<option value="12:30">12:30</option>
+<option value="13:15">13:15</option>
+</optgroup>
+<optgroup label="Večerja (Sreda - Nedelja)">
+<option selected="" value="18:30">18:30 (Priporočen sončni zahod)</option>
+<option value="19:30">19:30</option>
+<option value="20:15">20:15</option>
+</optgroup>
+</select>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="seatingArea">
+<span class="material-symbols-outlined text-[16px] text-primary">deck</span>
+                  Izbira prostora
+                </label>
+<select class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="seatingArea">
+<option selected="" value="terrace">Panoramska terasa ob reki</option>
+<option value="fireplace">Topli kamin &amp; salon</option>
+<option value="first_available">Prva prosta miza</option>
+</select>
+</div>
+</div>
+<!-- Row 3: Contact details -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="fullName">Ime in priimek</label>
+<input class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="fullName" placeholder="Luka Kovač" required="" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="phone">Telefonska številka</label>
+<input class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="phone" placeholder="+386 41 000 000" required="" type="tel"/>
+</div>
+</div>
+<!-- Row 4: Special Diet & Notes -->
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex flex-wrap items-center justify-between gap-x-3" for="dietary">
+<span>Prehranske posebnosti &amp; želje</span>
+<span class="font-caption text-caption text-on-surface-variant font-normal">Alergije, vegetarijansko, praznovanja</span>
+</label>
+<textarea class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="dietary" placeholder="Npr. 1x brez glutena, obletnica poroke..." rows="2"></textarea>
+</div>
+<!-- Submit Button -->
+<div class="pt-space-xs">
+<button class="w-full inline-flex items-center justify-center font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container hover:text-on-primary-container rounded-full py-4 shadow-lg shadow-primary/25 transition-all" type="submit">
+<span class="material-symbols-outlined text-[20px] mr-2">send</span>
+                Potrdite povpraševanje za rezervacijo
+              </button>
+</div>
+<!-- Confirmation Toast (Hidden by default) -->
+<div class="hidden p-4 rounded-lg bg-primary-container text-on-primary-container flex items-center gap-3" id="confirmationBanner" role="status">
+<span class="material-symbols-outlined text-[24px]">task_alt</span>
+<p class="font-body-sm text-body-sm font-medium" id="confirmationText">
+                Hvala! To je demo stran, zato povpraševanje ni bilo poslano. Na pravi strani bi vas v roku 3 ur kontaktirali za potrditev mize ob reki.
+              </p>
+</div>
+</form>
+</div>
+<!-- Location & Practical Visit Details Sidecard -->
+<div class="lg:col-span-5 space-y-space-md flex flex-col justify-between">
+<!-- Static Location Card with Google Maps Hook -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-md">
+<div class="w-full h-52 bg-cover bg-center relative" data-location="Kobarid, Dolina Soce, Slovenia" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCk_tbXIi-zrLVVfuBoxcuKEu22YIg5JRbq3Ehoax7GTgxfGU36aSweiGAXLWx97U0rvk3Io28xhdZ1bFd4XiTEh6TyxqbBO467p0WXodNN02aksySOuvYy5TRhZwRpUHfOB0pHWgHYuJLeotqn5RHHl5fOB5a4s323bTBZABdVE8ZOn43gtxVLNyhnS2xkW2h7ZR-pGP_EyIJghPqKM0NcLpcqsl6S5Q-9lxpijG84hJ03fk4SEimgfw'), url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23e5eeff%22/%3E%3Cpath d=%22M-10 40 L120 60 L260 30 L410 70 M60 -10 L90 210 M300 -10 L280 210%22 stroke=%22%23ffffff%22 stroke-width=%226%22 fill=%22none%22/%3E%3Cpath d=%22M-10 150 C80 110 140 190 220 140 S340 90 410 120%22 stroke=%22%236bd8cb%22 stroke-width=%2214%22 fill=%22none%22/%3E%3C/svg%3E');">
+<div class="absolute inset-0 bg-on-surface/20 flex items-center justify-center">
+<span class="px-4 py-2 rounded-full bg-surface-container-lowest/90 backdrop-blur-md font-label-sm text-label-sm text-on-surface flex items-center gap-1.5 shadow-md">
+<span class="material-symbols-outlined text-primary text-[18px]">pin_drop</span>
+                  Pod Gorko 12, 5222 Kobarid
+                </span>
+</div>
+</div>
+<div class="p-space-md space-y-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Dostop &amp; Prihod</h3>
+<div class="space-y-3 font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">local_parking</span>
+<div>
+<span class="text-on-surface font-semibold">Brezplačno zasebno parkirišče</span>
+<p class="font-caption text-caption">Za goste restavracije je zagotovljeno varovano parkirišče neposredno ob posestvu.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">ev_station</span>
+<div>
+<span class="text-on-surface font-semibold">EV Polnilne postaje</span>
+<p class="font-caption text-caption">2x 22kW Type-2 polnilnici za električna vozila brezplačno med vašim obedom.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">checkroom</span>
+<div>
+<span class="text-on-surface font-semibold">Kodeks oblačenja: Smart Alpine Casual</span>
+<p class="font-caption text-caption">Udobna, a uglajena oblačila. Zaradi svežega večernega vetra s kanjona priporočamo toplejši sloj za teraso.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Direct Sommelier & Concierge Contact Card -->
+<div class="p-space-md rounded-xl bg-surface-container text-on-surface space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Zasebni dogodki</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">celebration</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Načrtujete intimno poroko, poslovni obed ali zakup celotne terase? Stopite v stik z našim vodjo strežbe.
+            </p>
+<div class="pt-1">
+<a class="font-label-md text-label-md text-primary hover:underline inline-flex items-center gap-1.5" href="tel:+38650000000">
+<span class="material-symbols-outlined text-[18px]">call</span>
+                +386 (0)5 000 00 00
+              </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-low text-on-surface py-space-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-[1360px] mx-auto px-margin-lg"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter-lg pb-space-xl"><div class="space-y-space-md"><div class="space-y-1"><h3 class="font-headline-sm text-headline-sm text-on-surface">Restavracija Soča</h3><p class="font-label-sm text-label-sm uppercase tracking-wider text-primary">Kobarid • Dolina Soče • Julian Alps</p></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Kulinarično doživetje smaragdne reke, divjih gorskih zelišč in avtohtone soške postrvi na samem robu alpskega kanjona.</p><div class="pt-space-xs"><div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[18px]">water_drop</span><span>Alpska terasa ob reki Soči</span></div></div></div><div class="space-y-space-md"><h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Odpiralni Čas</h4><div class="space-y-2 font-body-sm text-body-sm text-on-surface-variant"><div class="flex justify-between pb-1"><span class="font-medium text-on-surface">Sreda – Petek</span><span>17:00 – 22:30</span></div><div class="flex justify-between pb-1"><span class="font-medium text-on-surface">Sobota – Nedelja</span><span>12:00 – 23:00</span></div><div class="flex justify-between pb-1"><span class="font-medium text-on-surface">Ponedeljek – Torek</span><span class="text-tertiary">Zaprto (Nabiralništvo)</span></div><p class="font-caption text-caption text-on-surface-variant pt-2">Zadnje naročilo degustacijskega menija ob 20:30.</p></div></div><div class="space-y-space-md"><h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Priznanja &amp; Kontakt</h4><div class="space-y-3"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[18px]">workspace_premium</span></div><div><p class="font-label-sm text-label-sm text-on-surface font-semibold">Michelin Guide Slovenia 2024</p><p class="font-caption text-caption text-on-surface-variant">Priporočilo za trajnostno gastronomijo</p></div></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[18px]">hotel_class</span></div><div><p class="font-label-sm text-label-sm text-on-surface font-semibold">Gault &amp; Millau 2024</p><p class="font-caption text-caption text-on-surface-variant">3 kape • 16.5 točk</p></div></div><div class="pt-2 font-body-sm text-body-sm text-on-surface-variant space-y-1"><p>Pod Gorko 12, 5222 Kobarid</p><p>+386 (0)5 000 00 00</p><p>rezervacije@restavracija-soca.example</p></div></div></div><div class="space-y-space-md"><h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface">E-Novice iz Doline</h4><p class="font-body-sm text-body-sm text-on-surface-variant">Prejemajte obvestila o novih sezonskih menijih, vinskih večerih in cvetenju alpskih zelišč.</p><div class="space-y-2"><div class="flex gap-2"><input aria-label="E-poštni naslov" class="w-full min-w-0 px-space-md py-space-sm bg-surface text-on-surface rounded-lg font-body-sm text-body-sm placeholder:text-outline focus:outline-none" id="newsletterEmail" placeholder="Vaš e-poštni naslov" type="email"/><button aria-label="Prijava na e-novice" class="bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container px-space-md py-space-sm rounded-lg font-label-md text-label-md transition-colors" id="newsletterButton" type="button"><span class="material-symbols-outlined text-[18px]">send</span></button></div><p class="font-caption text-caption text-on-surface-variant" id="newsletterNote" role="status">Z naročilom se strinjate z varovanjem osebnih podatkov.</p></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md font-caption text-caption text-on-surface-variant"><p>© 2025 Restavracija Soča d.o.o. Vse pravice pridržane. · Demo stran: restavracija, priznanja in kontakti so izmišljeni.</p><div class="flex flex-wrap justify-center items-center gap-x-space-lg gap-y-1"><a class="hover:text-on-surface transition-colors" href="#top">Zasebnost &amp; Piškotki</a><a class="hover:text-on-surface transition-colors" href="#top">Dostopnost za invalide</a><a class="hover:text-on-surface transition-colors" href="#rezervacija">Lokacija &amp; Parkirišče</a></div></div></div></footer>
 <script>
 (function () {
-  "use strict";
-  var root = document.documentElement;
-  var lang = "sl";
+  // Default the visit date to the next Wednesday–Sunday, at least 3 days ahead (the page recommends booking 3 days in advance).
+  var dateInput = document.getElementById("resDate");
+  var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + 3);
+  while (d.getDay() === 1 || d.getDay() === 2) d.setDate(d.getDate() + 1);
+  function iso(x) { return x.getFullYear() + "-" + String(x.getMonth() + 1).padStart(2, "0") + "-" + String(x.getDate()).padStart(2, "0"); }
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  dateInput.min = iso(today);
+  dateInput.value = iso(d);
 
-  /* ---------- opening hours ---------- */
-  var OPEN = { 0: [11, 21], 1: null, 2: [11, 22], 3: [11, 22], 4: [11, 22], 5: [11, 23], 6: [11, 23] };
-  function isWinter(month) { return month >= 10 || month <= 2; } // Nov–Mar
-  function hoursFor(date) {
-    var dow = date.getDay();
-    if (isWinter(date.getMonth()) && dow !== 5 && dow !== 6 && dow !== 0) return null;
-    return OPEN[dow];
-  }
-  function nowHere() {
-    // wall-clock time in Bovec, whatever the visitor's time zone
-    try {
-      var parts = new Intl.DateTimeFormat("en-GB", {
-        timeZone: "Europe/Ljubljana", year: "numeric", month: "numeric", day: "numeric",
-        hour: "numeric", minute: "numeric", hourCycle: "h23"
-      }).formatToParts(new Date());
-      var get = function (t) { return +parts.filter(function (p) { return p.type === t; })[0].value; };
-      return new Date(get("year"), get("month") - 1, get("day"), get("hour"), get("minute"));
-    } catch (e) { return new Date(); }
-  }
-  function hh(h) { return h + ":00"; }
-  function pad(n) { return (n < 10 ? "0" : "") + n; }
-  function isoDate(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
-
-  var T = {
-    sl: {
-      open: function (c) { return "Zdaj odprto · do " + c; },
-      later: function (o) { return "Danes odpremo ob " + o; },
-      closed: function (d, o) { return "Zaprto · odpremo " + d + " ob " + o; },
-      tomorrow: "jutri",
-      on: ["v nedeljo", "v ponedeljek", "v torek", "v sredo", "v četrtek", "v petek", "v soboto"],
-      errName: "Vpišite ime, da vemo, na koga se glasi miza.",
-      errContact: "Dodajte telefon ali e-pošto, da vam lahko potrdimo mizo.",
-      errDate: "Izberite datum.",
-      errPast: "Ta datum je že mimo. Izberite današnji ali poznejši dan.",
-      errMonday: "Ob ponedeljkih je gostilna zaprta. Izberite drug dan.",
-      errWinter: "Od novembra do marca smo odprti od petka do nedelje. Izberite drug dan.",
-      errLate: function (t) { return "Ta dan sprejemamo zadnje rezervacije ob " + t + ". Izberite zgodnejšo uro."; },
-      errGone: "Ta ura je danes že mimo. Izberite poznejšo.",
-      doneTitle: function (n) { return "Hvala, " + n + "."; },
-      doneText: "To je demo stran, zato povpraševanje ni bilo poslano. Na pravi strani bi ga gostilna prejela po e-pošti in vam mizo potrdila v nekaj urah.",
-      labels: ["Datum", "Ura", "Oseb", "Terasa", "Kontakt"],
-      yes: "da, če bo lepo vreme", no: "ne",
-      again: "Nova rezervacija",
-      locale: "sl-SI"
-    },
-    en: {
-      open: function (c) { return "Open now · until " + c; },
-      later: function (o) { return "Opens today at " + o; },
-      closed: function (d, o) { return "Closed · opens " + d + " at " + o; },
-      tomorrow: "tomorrow",
-      on: ["on Sunday", "on Monday", "on Tuesday", "on Wednesday", "on Thursday", "on Friday", "on Saturday"],
-      errName: "Please enter your name so we know who the table is for.",
-      errContact: "Please add a phone number or email so we can confirm your table.",
-      errDate: "Please choose a date.",
-      errPast: "That date has passed. Please choose today or a later day.",
-      errMonday: "We're closed on Mondays. Please choose another day.",
-      errWinter: "From November to March we open Friday to Sunday. Please choose another day.",
-      errLate: function (t) { return "Our last booking that day is at " + t + ". Please choose an earlier time."; },
-      errGone: "That time has already passed today. Please choose a later one.",
-      doneTitle: function (n) { return "Thank you, " + n + "."; },
-      doneText: "This is a demo site, so your request was not sent. On a live site the restaurant would receive it by email and confirm your table within a few hours.",
-      labels: ["Date", "Time", "Guests", "Terrace", "Contact"],
-      yes: "yes, if the weather is good", no: "no",
-      again: "Make another request",
-      locale: "en-GB"
-    }
-  };
-
-  function renderStatus() {
-    var el = document.getElementById("status");
-    var txt = document.getElementById("status-text");
-    var t = T[lang], now = nowHere(), h = hoursFor(now);
-    var mins = now.getHours() * 60 + now.getMinutes();
-    var open = false, text;
-    if (h && mins >= h[0] * 60 && mins < h[1] * 60) { open = true; text = t.open(hh(h[1])); }
-    else if (h && mins < h[0] * 60) { text = t.later(hh(h[0])); }
-    else {
-      for (var i = 1; i <= 7; i++) {
-        var d = new Date(now); d.setDate(d.getDate() + i);
-        var nh = hoursFor(d);
-        if (nh) { text = t.closed(i === 1 ? t.tomorrow : t.on[d.getDay()], hh(nh[0])); break; }
-      }
-    }
-    el.setAttribute("data-open", open ? "true" : "false");
-    txt.textContent = text;
-
-    var dow = now.getDay();
-    var rows = document.querySelectorAll("#hours tr[data-days]");
-    for (var r = 0; r < rows.length; r++) {
-      var days = rows[r].getAttribute("data-days").split(",").map(Number);
-      rows[r].classList.toggle("is-today", days.indexOf(dow) !== -1);
-    }
-  }
-
-  /* ---------- language ---------- */
-  function setLang(next) {
-    lang = next === "en" ? "en" : "sl";
-    if (lang === "en") root.setAttribute("data-lang", "en"); else root.removeAttribute("data-lang");
-    root.lang = lang;
-    var btns = document.querySelectorAll("[data-set-lang]");
-    for (var i = 0; i < btns.length; i++) btns[i].setAttribute("aria-pressed", btns[i].getAttribute("data-set-lang") === lang ? "true" : "false");
-    var ph = document.querySelectorAll("[data-ph-sl]");
-    for (var j = 0; j < ph.length; j++) ph[j].placeholder = ph[j].getAttribute("data-ph-" + lang);
-    renderStatus();
-    if (lastBooking) renderDone();
-    if (lastError) showError(lastError);
-    try { localStorage.setItem("pribrvi-lang", lang); } catch (e) {}
-  }
-  document.addEventListener("click", function (e) {
-    var b = e.target.closest ? e.target.closest("[data-set-lang]") : null;
-    if (b) setLang(b.getAttribute("data-set-lang"));
-  });
-
-  /* ---------- reservation (demo, nothing is sent) ---------- */
-  var form = document.getElementById("reserve-form");
-  var fields = document.getElementById("form-fields");
-  var done = document.getElementById("form-done");
-  var errEl = document.getElementById("form-error");
-  var dateIn = document.getElementById("r-date");
-  var lastBooking = null, lastError = null;
-
-  (function initDate() {
-    var today = nowHere();
-    dateIn.min = isoDate(today);
-    var d = new Date(today);
-    for (var i = 1; i <= 8; i++) { d.setDate(d.getDate() + 1); if (hoursFor(d)) break; }
-    dateIn.value = isoDate(d);
-  })();
-
-  function showError(err) {
-    lastError = err;
-    var t = T[lang];
-    var msg = typeof t[err.key] === "function" ? t[err.key](err.arg) : t[err.key];
-    errEl.textContent = msg;
-    errEl.hidden = false;
-  }
-  function clearError() { lastError = null; errEl.hidden = true; errEl.textContent = ""; }
-
-  function validate(data) {
-    if (!data.name) return { key: "errName", focus: "r-name" };
-    if (!data.contact) return { key: "errContact", focus: "r-contact" };
-    if (!data.date) return { key: "errDate", focus: "r-date" };
-    var p = data.date.split("-").map(Number);
-    var day = new Date(p[0], p[1] - 1, p[2]);
-    var now = nowHere();
-    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    if (day < today) return { key: "errPast", focus: "r-date" };
-    var h = hoursFor(day);
-    if (!h) return { key: day.getDay() === 1 ? "errMonday" : "errWinter", focus: "r-date" };
-    var tp = data.time.split(":").map(Number), mins = tp[0] * 60 + tp[1];
-    var last = (h[1] - 1) * 60;
-    if (mins > last) return { key: "errLate", arg: hh(h[1] - 1), focus: "r-time" };
-    if (day.getTime() === today.getTime() && mins <= now.getHours() * 60 + now.getMinutes()) return { key: "errGone", focus: "r-time" };
-    return null;
-  }
-
-  function renderDone() {
-    var t = T[lang], b = lastBooking;
-    var p = b.date.split("-").map(Number);
-    var dateStr = new Intl.DateTimeFormat(t.locale, { weekday: "long", day: "numeric", month: "long" }).format(new Date(p[0], p[1] - 1, p[2]));
-    document.getElementById("done-title").textContent = t.doneTitle(b.name.split(/\s+/)[0]);
-    document.getElementById("done-text").textContent = t.doneText;
-    var dl = document.getElementById("done-summary");
-    dl.textContent = "";
-    [[t.labels[0], dateStr], [t.labels[1], b.time], [t.labels[2], b.guests], [t.labels[3], b.terrace ? t.yes : t.no], [t.labels[4], b.contact]].forEach(function (row) {
-      var dt = document.createElement("dt"); dt.textContent = row[0];
-      var dd = document.createElement("dd"); dd.textContent = row[1];
-      dl.appendChild(dt); dl.appendChild(dd);
-    });
-    document.getElementById("done-again").textContent = t.again;
-  }
-
+  // Demo reservation: nothing is sent, the banner says so.
+  var form = document.getElementById("reservationForm");
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var data = {
-      name: form.elements.name.value.trim(),
-      contact: form.elements.contact.value.trim(),
-      date: form.elements.date.value,
-      time: form.elements.time.value,
-      guests: form.elements.guests.value,
-      terrace: form.elements.terrace.checked
-    };
-    var err = validate(data);
-    if (err) { showError(err); document.getElementById(err.focus).focus(); return; }
-    clearError();
-    lastBooking = data;
-    renderDone();
-    fields.hidden = true;
-    done.hidden = false;
-    document.getElementById("done-title").focus();
-  });
-  document.getElementById("done-again").addEventListener("click", function () {
-    lastBooking = null;
-    done.hidden = true;
-    fields.hidden = false;
-    document.getElementById("r-name").focus();
+    var banner = document.getElementById("confirmationBanner");
+    banner.classList.remove("hidden");
   });
 
-  var saved = null;
-  try { saved = localStorage.getItem("pribrvi-lang"); } catch (e) {}
-  setLang(saved === "en" ? "en" : "sl");
-  setInterval(renderStatus, 60000);
-})();
-
-/* ---------- hero landscape: Julian Alps, the Soča and the footbridge ---------- */
-(function () {
-  "use strict";
-  var hero = document.querySelector(".hero");
-  var canvas = document.getElementById("scene");
-  var sceneBox = hero && hero.querySelector(".hero-scene");
-  if (!hero || !canvas || !canvas.getContext || !sceneBox) return;
-  var ctx = canvas.getContext("2d");
-  var motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var W = 0, H = 0, dpr = 1, back = null, front = null, sparks = [], C = {};
-  var rafId = 0, visible = true, t0 = performance.now(), pending = 0;
-
-  function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
-  function rgba(hex, a) {
-    var h = hex.replace("#", "");
-    if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
-    var n = parseInt(h.slice(0, 6), 16);
-    return "rgba(" + (n >> 16 & 255) + "," + (n >> 8 & 255) + "," + (n & 255) + "," + a + ")";
-  }
-  function rng(a) {
-    return function () {
-      a |= 0; a = a + 0x6D2B79F5 | 0;
-      var t = Math.imul(a ^ a >>> 15, 1 | a);
-      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-      return ((t ^ t >>> 14) >>> 0) / 4294967296;
-    };
-  }
-  function noise(seed) {
-    var r = rng(seed), v = [];
-    for (var i = 0; i < 512; i++) v.push(r());
-    return function (x) {
-      var i = Math.floor(x), f = x - i, t = f * f * (3 - 2 * f);
-      var a = v[(i % 512 + 512) % 512], b = v[((i + 1) % 512 + 512) % 512];
-      return a + (b - a) * t;
-    };
-  }
-  function fbm(n, x, oct) {
-    var s = 0, amp = 1, f = 1, norm = 0;
-    for (var o = 0; o < oct; o++) { s += amp * n(x * f); norm += amp; amp *= 0.5; f *= 2.07; }
-    return s / norm;
-  }
-  function layer() {
-    var c = document.createElement("canvas");
-    c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
-    var g = c.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    return { c: c, g: g };
-  }
-  function spruce(g, x, y, h) {
-    g.beginPath();
-    for (var i = 0; i < 4; i++) {
-      var apex = y - h + i * h * 0.2, base = apex + h * 0.42, hw = h * (0.12 + i * 0.055);
-      g.moveTo(x, apex); g.lineTo(x + hw, base); g.lineTo(x - hw, base); g.closePath();
-    }
-    g.rect(x - h * 0.025, y - h * 0.2, h * 0.05, h * 0.2);
-    g.fill();
-  }
-
-  function build() {
-    pending = 0;
-    W = Math.max(1, Math.round(hero.clientWidth));
-    H = Math.max(1, Math.round(hero.clientHeight));
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
-    C = {
-      skyTop: css("--sky-top"), skyBottom: css("--sky-bottom"), stars: css("--stars") === "1", star: css("--star"),
-      snow: css("--snow"), r1: css("--ridge-1"), r2: css("--ridge-2"), r3: css("--ridge-3"), r4: css("--ridge-4"),
-      meadow: css("--meadow"), gravel: css("--gravel"), river: css("--river"), riverDeep: css("--river-deep"),
-      riverHi: css("--river-hi"), bridge: css("--bridge"), wall: css("--wall"), roof: css("--roof"),
-      win: css("--window"), tree: css("--tree"), glow: css("--glow") === "1", fade: css("--hero-fade")
-    };
-    var S = sceneBox.offsetHeight, top = H - S;
-    var B = layer(), F = layer(), b = B.g, f = F.g;
-    var rand = rng(1962);
-
-    // sky
-    var sky = b.createLinearGradient(0, 0, 0, top + S * 0.55);
-    sky.addColorStop(0, C.skyTop); sky.addColorStop(1, C.skyBottom);
-    b.fillStyle = sky; b.fillRect(0, 0, W, H);
-    if (C.stars) {
-      b.fillStyle = C.star;
-      for (var s = 0; s < Math.round(W / 8); s++) {
-        b.globalAlpha = 0.2 + rand() * 0.6;
-        var sz = rand() < 0.12 ? 1.6 : 1;
-        b.fillRect(rand() * W, rand() * (top + S * 0.3), sz, sz);
-      }
-      b.globalAlpha = 1;
-      if (W > 700) {
-        var mx = W * 0.84, my = Math.max(60, top * 0.4), glow = b.createRadialGradient(mx, my, 0, mx, my, 70);
-        glow.addColorStop(0, rgba(C.star, 0.18)); glow.addColorStop(1, rgba(C.star, 0));
-        b.fillStyle = glow; b.fillRect(mx - 70, my - 70, 140, 140);
-        b.fillStyle = C.star; b.beginPath(); b.arc(mx, my, 13, 0, Math.PI * 2); b.fill();
-      }
-    }
-
-    // valley floor and river geometry (shared by ridges, river and bridge)
-    var floorTop = top + S * 0.70;
-    function floorY(x) { return floorTop + S * 0.025 * Math.sin((x / W) * Math.PI * 2 + 0.8); }
-    var x0 = W * 0.30, y0 = floorY(x0) + 1, endW = Math.min(W * 0.30, 380);
-    function rx(t) { return x0 + W * 0.20 * t + W * 0.14 * Math.sin(t * Math.PI * 1.6); }
-    function ry(t) { return y0 + (H + 4 - y0) * Math.pow(t, 1.7); }
-    function rw(t) { return 2 + endW * Math.pow(t, 1.7); }
-
-    // mountain ridges, far to near
-    var ridges = [
-      { seed: 11, top: 0.00, bottom: 0.58, scale: 230, oct: 5, pow: 1.5, fill: C.r1, snow: true, gap: 0.25 },
-      { seed: 23, top: 0.16, bottom: 0.66, scale: 180, oct: 5, pow: 1.25, fill: C.r2, gap: 0.45 },
-      { seed: 37, top: 0.34, bottom: 0.76, scale: 150, oct: 4, pow: 1.1, fill: C.r3, gap: 0.7 },
-      { seed: 53, top: 0.50, bottom: 0.80, scale: 260, oct: 3, pow: 1.0, fill: C.r4, gap: 0.8, trees: true }
-    ];
-    ridges.forEach(function (R, idx) {
-      var n = noise(R.seed), pts = [], lo = 1, hi = 0, step = 3;
-      for (var x = -step; x <= W + step; x += step) {
-        var v = fbm(n, (x + R.seed * 97) / R.scale, R.oct);
-        pts.push([x, v]); if (v < lo) lo = v; if (v > hi) hi = v;
-      }
-      var yTop = top + S * R.top, yBot = top + S * R.bottom, minY = H;
-      pts.forEach(function (p) {
-        var v = Math.pow((p[1] - lo) / (hi - lo || 1), R.pow);
-        var d = (p[0] - x0) / (W * 0.13);
-        v *= 1 - R.gap * Math.exp(-d * d); // open a valley where the river comes from
-        p[1] = yBot - (yBot - yTop) * v;
-        if (p[1] < minY) minY = p[1];
-      });
-      if (R.snow) {
-        var sg = b.createLinearGradient(0, minY, 0, minY + (yBot - minY) * 0.45);
-        sg.addColorStop(0, C.snow); sg.addColorStop(0.38, C.snow); sg.addColorStop(1, R.fill);
-        b.fillStyle = sg;
-      } else b.fillStyle = R.fill;
-      b.beginPath(); b.moveTo(pts[0][0], H);
-      pts.forEach(function (p) { b.lineTo(p[0], p[1]); });
-      b.lineTo(pts[pts.length - 1][0], H); b.closePath(); b.fill();
-
-      if (R.trees) {
-        b.fillStyle = C.tree;
-        for (var k = 0; k < pts.length; k += 2) {
-          var th = 5 + rand() * Math.max(4, S * 0.03);
-          spruce(b, pts[k][0] + rand() * 3, pts[k][1] + th * 0.35, th);
-        }
-      }
-      if (idx < 3) { // valley haze between layers
-        var hz = b.createLinearGradient(0, yBot - (yBot - yTop) * 0.55, 0, yBot);
-        hz.addColorStop(0, rgba(C.skyBottom, 0)); hz.addColorStop(1, rgba(C.skyBottom, 0.5));
-        b.fillStyle = hz; b.fillRect(0, yBot - (yBot - yTop) * 0.55, W, (yBot - yTop) * 0.55 + 1);
-      }
+  // "Choose this menu" buttons prefill the notes.
+  document.querySelectorAll("[data-menu]").forEach(function (a) {
+    a.addEventListener("click", function () {
+      var notes = document.getElementById("dietary");
+      var label = a.getAttribute("data-menu") === "8" ? "Meni: Alpska dediščina (8 hodov)" : "Meni: Smaragdni tok (6 hodov)";
+      notes.value = notes.value.replace(/^Meni: .*\n?/, "");
+      notes.value = label + (notes.value ? "\n" + notes.value : "");
     });
+  });
 
-    // meadow
-    b.fillStyle = C.meadow; b.beginPath(); b.moveTo(0, H);
-    for (var mx2 = 0; mx2 <= W; mx2 += 6) b.lineTo(mx2, floorY(mx2));
-    b.lineTo(W, floorY(W)); b.lineTo(W, H); b.closePath(); b.fill();
-
-    // river with white gravel banks
-    function ribbon(g, scale, extra) {
-      var L = [], Rr = [], N = 90;
-      for (var i = 0; i <= N; i++) {
-        var t = i / N, cx = rx(t), cy = ry(t), hw = rw(t) * scale / 2 + extra * Math.pow(t, 1.2);
-        L.push([cx - hw, cy]); Rr.push([cx + hw, cy]);
-      }
-      g.beginPath(); g.moveTo(L[0][0], L[0][1]);
-      L.forEach(function (p) { g.lineTo(p[0], p[1]); });
-      for (var j = Rr.length - 1; j >= 0; j--) g.lineTo(Rr[j][0], Rr[j][1]);
-      g.closePath(); g.fill();
+  // Newsletter: demo only.
+  document.getElementById("newsletterButton").addEventListener("click", function () {
+    var email = document.getElementById("newsletterEmail");
+    var note = document.getElementById("newsletterNote");
+    if (!email.value || !email.checkValidity()) {
+      note.textContent = "Vpišite veljaven e-poštni naslov.";
+      email.focus();
+      return;
     }
-    b.fillStyle = C.gravel; ribbon(b, 1.5, 6);
-    var water = b.createLinearGradient(0, y0, 0, H);
-    water.addColorStop(0, C.river); water.addColorStop(1, C.riverDeep);
-    b.fillStyle = water; ribbon(b, 1, 0);
-
-    // sparkles on the water (animated between the two layers)
-    sparks = [];
-    for (var sp = 0; sp < 46; sp++) {
-      var tt = 0.12 + rand() * 0.88, u = (rand() - 0.5) * 0.7;
-      sparks.push({ x: rx(tt) + u * rw(tt), y: ry(tt), l: 2 + rw(tt) * 0.09, lw: tt > 0.6 ? 1.6 : 1, ph: rand() * 6.28, sp: 0.6 + rand() * 1.1 });
-    }
-
-    // suspension footbridge
-    var tb = 0.66, bx = rx(tb), by = ry(tb), span = rw(tb) * 0.75 + 10;
-    var xl = bx - span, xr = bx + span, tower = Math.max(13, S * 0.07), deck = by - 2;
-    f.strokeStyle = C.bridge; f.lineCap = "round"; f.lineWidth = 1.6;
-    f.beginPath();
-    f.moveTo(xl, deck + 3); f.lineTo(xl, deck - tower);
-    f.moveTo(xr, deck + 3); f.lineTo(xr, deck - tower);
-    f.moveTo(xl, deck - tower); f.lineTo(xl - tower * 0.7, deck + 3);
-    f.moveTo(xr, deck - tower); f.lineTo(xr + tower * 0.7, deck + 3);
-    f.stroke();
-    var cabY = function (t) { var a = deck - tower, c = 2 * (deck - 3) - a; return (1 - t) * (1 - t) * a + 2 * (1 - t) * t * c + t * t * a; };
-    var deckY = function (t) { return deck + 4 * t * (1 - t) * 2.5; };
-    f.beginPath();
-    for (var q = 0; q <= 40; q++) { var tq = q / 40; var X = xl + (xr - xl) * tq; if (q) f.lineTo(X, cabY(tq)); else f.moveTo(X, cabY(tq)); }
-    f.stroke();
-    f.lineWidth = 2;
-    f.beginPath();
-    for (var q2 = 0; q2 <= 40; q2++) { var tq2 = q2 / 40; var X2 = xl + (xr - xl) * tq2; if (q2) f.lineTo(X2, deckY(tq2)); else f.moveTo(X2, deckY(tq2)); }
-    f.stroke();
-    f.lineWidth = 0.9;
-    f.beginPath();
-    var hangers = Math.max(6, Math.round((xr - xl) / 9));
-    for (var hg = 1; hg < hangers; hg++) {
-      var th2 = hg / hangers, X3 = xl + (xr - xl) * th2;
-      f.moveTo(X3, cabY(th2)); f.lineTo(X3, deckY(th2));
-    }
-    f.stroke();
-
-    // the house on the far bank, with a lit window
-    var hw2 = Math.max(24, S * 0.11), hx = xr + tower * 0.7 + Math.max(10, S * 0.04), hy = deck + 3;
-    if (hx + hw2 * 2 > W) hx = xl - tower * 0.7 - Math.max(10, S * 0.04) - hw2;
-    var wallH = hw2 * 0.58;
-    f.fillStyle = C.tree;
-    spruce(f, hx + hw2 * 1.45, hy, hw2 * 1.5);
-    spruce(f, hx + hw2 * 1.9, hy + 1, hw2 * 1.1);
-    f.fillStyle = C.wall; f.fillRect(hx, hy - wallH, hw2, wallH);
-    f.fillStyle = C.roof;
-    f.fillRect(hx + hw2 * 0.66, hy - wallH - hw2 * 0.62, hw2 * 0.1, hw2 * 0.3);
-    f.beginPath(); f.moveTo(hx - hw2 * 0.12, hy - wallH); f.lineTo(hx + hw2 * 0.5, hy - wallH - hw2 * 0.62); f.lineTo(hx + hw2 * 1.12, hy - wallH); f.closePath(); f.fill();
-    var ww = hw2 * 0.16, wy = hy - wallH * 0.68;
-    if (C.glow) {
-      var lg = f.createRadialGradient(hx + hw2 * 0.5, wy, 0, hx + hw2 * 0.5, wy, hw2 * 1.2);
-      lg.addColorStop(0, rgba(C.win, 0.28)); lg.addColorStop(1, rgba(C.win, 0));
-      f.fillStyle = lg; f.fillRect(hx - hw2, wy - hw2 * 1.2, hw2 * 3, hw2 * 2.4);
-    }
-    f.fillStyle = C.win;
-    f.fillRect(hx + hw2 * 0.2, wy, ww, ww * 1.2);
-    f.fillRect(hx + hw2 * 0.64, wy, ww, ww * 1.2);
-
-    // foreground spruces framing the view
-    f.fillStyle = C.tree;
-    spruce(f, W * 0.04, H + 4, S * 0.42);
-    spruce(f, W * 0.11, H + 6, S * 0.3);
-    spruce(f, W * 0.95, H + 4, S * 0.38);
-    spruce(f, W * 0.88, H + 8, S * 0.24);
-
-    // fade the foreground into the page, like the reference hero
-    var fadeH = Math.max(40, S * 0.16), fd = f.createLinearGradient(0, H - fadeH, 0, H);
-    fd.addColorStop(0, rgba(C.fade, 0)); fd.addColorStop(1, rgba(C.fade, 1));
-    f.fillStyle = fd; f.fillRect(0, H - fadeH, W, fadeH);
-
-    back = B.c; front = F.c;
-    kick();
-  }
-
-  function frame(now) {
-    rafId = 0;
-    if (!back) return;
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(back, 0, 0);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var time = (now - t0) / 1000, still = motion.matches;
-    ctx.strokeStyle = C.riverHi; ctx.lineCap = "round";
-    for (var i = 0; i < sparks.length; i++) {
-      var s = sparks[i], a = still ? 0.5 : Math.max(0, Math.sin(time * s.sp + s.ph));
-      ctx.globalAlpha = still ? 0.35 : 0.06 + 0.8 * a * a * a;
-      ctx.lineWidth = s.lw;
-      ctx.beginPath(); ctx.moveTo(s.x - s.l / 2, s.y); ctx.lineTo(s.x + s.l / 2, s.y); ctx.stroke();
-    }
-    ctx.globalAlpha = 1;
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.drawImage(front, 0, 0);
-    if (!still && visible && !document.hidden) rafId = requestAnimationFrame(frame);
-  }
-  function kick() { if (!rafId) rafId = requestAnimationFrame(frame); }
-  function schedule() { if (!pending) pending = requestAnimationFrame(build); }
-
-  if ("ResizeObserver" in window) new ResizeObserver(schedule).observe(hero);
-  else window.addEventListener("resize", schedule);
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; if (visible) kick(); }).observe(hero);
-  }
-  document.addEventListener("visibilitychange", kick);
-  if (motion.addEventListener) motion.addEventListener("change", kick);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
-  build();
+    note.textContent = "To je demo stran, zato prijava ni bila shranjena.";
+  });
 })();
 </script>
 </body>

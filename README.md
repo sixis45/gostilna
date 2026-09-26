@@ -1,32 +1,37 @@
-# Gostilna Pri Brvi
+# Gostilna demo sites
 
-Demo website for a fictional gostilna in Čezsoča near Bovec, in the Soča valley.
-The restaurant, menu, prices and contact details are made up.
+Two demo restaurant websites set in the Soča valley. Both restaurants, their menus, awards and contact details are made up.
 
-## What's on the page
+| File | What it is |
+| --- | --- |
+| `index.html` | **Restavracija Soča**: a working copy of the reference UI (Tailwind, Plus Jakarta Sans + Inter, Material Symbols). |
+| `pri-brvi.html` | **Gostilna Pri Brvi**: the first version, a single self-contained page with a canvas-drawn landscape, SL/EN switch and live opening status. |
 
-- **Hero**: a landscape of the Julian Alps, the Soča with its gravel banks, a suspension footbridge and the house, drawn on a `<canvas>`. It adapts to light and dark mode, and the river sparkle animation stops when the visitor prefers reduced motion.
-- **Open / closed status**, computed from the opening hours in Europe/Ljubljana time, including the shorter winter schedule.
-- **Menu** with prices, allergen codes (EU numbering) and vegetarian marks.
-- **"From source to plate"**: where the ingredients come from, in order down the river from Trenta to Goriška Brda.
-- **Visit info**: hours (today's row is highlighted), address, distances and practical notes.
-- **Reservation form**: validates closed days, the kitchen's last booking time and past dates. It's a demo, so nothing is sent.
-- **Language switch** between Slovenian and English. The choice is remembered in the browser.
+## Restavracija Soča (`index.html`)
 
-## Running it
+The markup and design follow the reference UI. Changes from the original:
 
-It's one self-contained file with no build step. Open `index.html` in a browser, or serve the folder:
+- Tailwind is compiled into `styles.css` instead of loaded from the play CDN (`cdn.tailwindcss.com`), which isn't meant for production.
+- The navigation links scroll to their sections, and the "Izberite ta meni" buttons add the chosen menu to the reservation notes.
+- The reservation date defaults to the next open day (Wednesday–Sunday), at least 3 days ahead.
+- The confirmation banner and the newsletter field say plainly that this is a demo and nothing was sent.
+- Phone and email are placeholders, and the footer notes that the restaurant, awards and contacts are fictional.
+- If a photo can't load, a stand-in appears instead of a broken image: a drawn river landscape in the hero, and a teal panel with an icon elsewhere.
+- Small mobile fixes: smaller headline sizes on phones (using the UI's own `*-mobile` type tokens) and wrapping so nothing overflows sideways.
+
+The photos are still loaded from the original `lh3.googleusercontent.com` links. Download them into the repo if you want the site to keep working when those links expire.
+
+### Editing styles
+
+After changing Tailwind classes in `index.html`, rebuild the CSS:
 
 ```sh
-npx serve .
+npm install
+npm run build:css
 ```
 
-To publish it, enable GitHub Pages for this repository (Settings → Pages → deploy from branch, root folder).
+The colour palette and type scale live in `tailwind.config.js`.
 
-## Customising
+## Running
 
-- **Name, address, phone**: search `index.html` for `Pri Brvi`, `Čezsoča 14` and `+386 5 000 00 00`.
-- **Menu**: each dish is an `<li class="dish">`. Slovenian and English text sit side by side in `<span lang="sl">` / `<span lang="en">`.
-- **Opening hours**: update the `OPEN` table in the script and the hours table in the "Obisk" section.
-- **Colours and fonts**: CSS custom properties at the top of the `<style>` block, with a separate dark palette.
-- **Real reservations**: replace the demo submit handler with a call to a form service or your own backend.
+No server needed: open `index.html` or `pri-brvi.html` in a browser, or serve the folder with `npx serve .`. To publish, enable GitHub Pages for this repository (Settings → Pages → deploy from branch, root folder).
