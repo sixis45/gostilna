@@ -23,6 +23,16 @@ The markup and design follow the reference "Restavracija Soča" UI. Changes from
 
 The photos and logo from the reference UI are stored in `img/` at full resolution, so the site no longer depends on the original `lh3.googleusercontent.com` links.
 
+### Languages
+
+The page is in Slovenian, with English and Italian available from the SL / EN / IT switch in the header. The choice is remembered in the browser.
+
+The Slovenian text lives in the HTML. The English and Italian versions are in the `T` dictionary in the script at the bottom of `index.html`, keyed by the exact Slovenian text. When you change a Slovenian sentence, change its key in `T` as well, or that sentence stays in Slovenian in the other languages.
+
+### Favicon
+
+`favicon.svg` (modern browsers), `favicon-32.png` (fallback) and `apple-touch-icon.png` (iOS home screen) use the logo mark: mountains, the footbridge and the river.
+
 ### Editing styles
 
 After changing Tailwind classes in `index.html`, rebuild the CSS:
@@ -33,6 +43,10 @@ npm run build:css
 ```
 
 The colour palette and type scale live in `tailwind.config.js`.
+
+## Deploying to Netlify
+
+`netlify.toml` already holds the settings: Netlify runs `npm run build:css` and publishes the repository root. In Netlify choose **Add new site → Import an existing project → GitHub**, pick `sixis45/gostilna` and the `main` branch, and deploy. No other settings are needed.
 
 ## Running
 
