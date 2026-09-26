@@ -4,11 +4,6 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Gostilna Pri Brvi</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
 html{scroll-padding-top:5rem;scroll-behavior:smooth;}
 body{background-color:#f8f9ff;color:#0b1c30;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:24px;-webkit-font-smoothing:antialiased;}
@@ -83,7 +78,6 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
     d.setAttribute("role", "img");
     d.setAttribute("aria-label", small ? "Gostilna Pri Brvi" : img.alt);
     d.style.cssText = "display:flex;align-items:center;justify-content:center;color:rgba(244,255,252,.85);background:linear-gradient(135deg,#008378,#00685f 55%,#005049);" + (small ? "width:32px;height:32px;border-radius:8px;" : "");
-    d.innerHTML = '<span class="material-symbols-outlined" style="font-size:' + (small ? 20 : 56) + 'px">' + (img.getAttribute("data-icon") || "restaurant") + "</span>";
     img.replaceWith(d);
   }, true);
   window.addEventListener("resize", function () { if (sceneOn) drawScene(); });
@@ -126,28 +120,28 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 <!-- Action Buttons & Badges -->
 <div class="flex flex-wrap items-center gap-space-md pt-space-xs">
 <a class="inline-flex items-center justify-center font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container hover:text-on-primary-container rounded-full px-8 py-3.5 shadow-lg shadow-primary/25 transition-all transform hover:-translate-y-0.5" href="#rezervacija">
-<span class="material-symbols-outlined text-[20px] mr-2">restaurant</span>
+<svg aria-hidden="true" class="w-[20px] h-[20px] shrink-0  mr-2" fill="currentColor" viewBox="0 -960 960 960"><path d="M285-80v-368q-52-11-88.5-52.5T160-600v-280h60v280h65v-280h60v280h65v-280h60v280q0 58-36.5 99.5T345-448v368h-60Zm415 0v-320H585v-305q0-79 48-127t127-48v800h-60Z"/></svg>
               Rezervirajte mizo
             </a>
 <a class="inline-flex items-center justify-center font-label-md text-label-md text-surface-container-lowest bg-surface-container-lowest/20 hover:bg-surface-container-lowest/30 backdrop-blur-md rounded-full px-8 py-3.5 transition-all" href="#degustacija">
               Poglejte jedilnik
-              <span class="material-symbols-outlined text-[18px] ml-1.5">arrow_forward</span>
+              <svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0  ml-1.5" fill="currentColor" viewBox="0 -960 960 960"><path d="M686-450H160v-60h526L438-758l42-42 320 320-320 320-42-42 248-248Z"/></svg>
 </a>
 </div>
 <!-- Accolades Strip -->
 <div class="pt-space-lg flex flex-wrap items-center gap-6 text-surface-container-lowest/90 font-label-sm text-label-sm">
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary-fixed text-[20px]" style="font-variation-settings: 'FILL' 1;">home</span>
+<svg aria-hidden="true" class="w-[20px] h-[20px] shrink-0 text-primary-fixed" fill="currentColor" viewBox="0 -960 960 960"><path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/></svg>
 <span>Družinska gostilna od leta 1962</span>
 </div>
 <div class="h-3 w-px bg-surface-container-lowest/30"></div>
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-tertiary-fixed text-[20px]" style="font-variation-settings: 'FILL' 1;">deck</span>
+<svg aria-hidden="true" class="w-[20px] h-[20px] shrink-0 text-tertiary-fixed" fill="currentColor" viewBox="0 -960 960 960"><path d="M450-80v-520H80l400-280 400 280H510v520h-60Zm-330 0v-211L88-466l58-10 32 166h162v230h-60v-170H180v170h-60Zm500 0v-230h162l32-166 58 10-32 175v211h-60v-170H680v170h-60Z"/></svg>
 <span>Terasa nad Sočo</span>
 </div>
 <div class="h-3 w-px bg-surface-container-lowest/30"></div>
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary-fixed text-[20px]">eco</span>
+<svg aria-hidden="true" class="w-[20px] h-[20px] shrink-0 text-primary-fixed" fill="currentColor" viewBox="0 -960 960 960"><path d="M213-175q-43.59-45-68.3-104Q120-338 120-400q0-73 25.5-133.5T222-645q35-35 87-59t122.5-37.5Q502-755 591-758.5t198 3.5q8 108 5.5 197.5t-16 160.75q-13.5 71.25-38 124.56Q716-218.87 680-183q-51 51-110 77T444-80q-69 0-126.5-23.5T213-175Zm103 0q25 17 58 26t69.92 9Q497-140 547-162t91-64q27-27 46-70.5t31-103Q727-459 731-534t0-165q-94-2-168.5 2.5T431-680q-57 12-98 30.5T266-604q-42 43-64 91t-22 98q0 48 20.5 100.5T251-230q53-98 127-176t157-123q-87 75-141 162.5T316-175Zm0 0Zm0 0Z"/></svg>
 <span>Sestavine iz doline in s planin</span>
 </div>
 </div>
@@ -186,7 +180,7 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-sm" id="sestavine">
 <div class="p-space-md rounded-xl bg-surface-container-low transition-all hover:bg-surface-container">
 <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-3">
-<span class="material-symbols-outlined text-[22px]">water</span>
+<svg aria-hidden="true" class="w-[22px] h-[22px] shrink-0" fill="currentColor" viewBox="0 -960 960 960"><path d="M80-251v-60q38 0 61.5-23t68.5-23q45 0 70 27t64 27q39 0 65-27t71-27q45 0 70.5 27t64.5 27q39 0 64.5-27t70.5-27q45 0 68.5 23t61.5 23v60q-47 0-69.5-23T750-297q-38 0-64 27t-71 27q-45 0-71-27t-64-27q-38 0-64.5 27T344-243q-45 0-70.5-27T210-297q-38 0-60.5 23T80-251Zm0-160v-60q38 0 61.5-23t68.5-23q45 0 70 27t64 27q39 0 65-27t71-27q45 0 70.5 27t64.5 27q39 0 64.5-27t70.5-27q45 0 68.5 23t61.5 23v60q-47 0-69.5-23T750-457q-38 0-64 27t-71 27q-45 0-71-27t-64-27q-38 0-64.5 27T344-403q-45 0-70.5-27T210-457q-38 0-60.5 23T80-411Zm0-160v-60q38 0 61.5-23t68.5-23q45 0 70 27t64 27q39 0 65-27t71-27q45 0 70.5 27t64.5 27q39 0 64.5-27t70.5-27q45 0 68.5 23t61.5 23v60q-47 0-69.5-23T750-617q-38 0-64 27t-71 27q-45 0-71-27t-64-27q-38 0-64.5 27T344-563q-45 0-70.5-27T210-617q-38 0-60.5 23T80-571Z"/></svg>
 </div>
 <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Postrv iz doline</h3>
 <p class="font-body-sm text-body-sm text-on-surface-variant">
@@ -195,7 +189,7 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 </div>
 <div class="p-space-md rounded-xl bg-surface-container-low transition-all hover:bg-surface-container">
 <div class="w-10 h-10 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center mb-3">
-<span class="material-symbols-outlined text-[22px]">grass</span>
+<svg aria-hidden="true" class="w-[22px] h-[22px] shrink-0" fill="currentColor" viewBox="0 -960 960 960"><path d="M80-160v-60h240q-20-91-87.5-159.5T80-470q20-5 39.5-7.5T160-480q134 0 227 93t93 227H80Zm460 0q0-42-8-73.5T512-296q40-88 120-136t168-48q21 0 40.5 2.5T880-470q-85 22-154 91.5T640-220h240v60H540Zm-58-193q-9-76 13-142t64.5-115Q602-659 662-688t127-31q-56 35-105.5 95.5T621-494q-44 21-80 58.5T482-353Zm-61-76q-16-15-35-30t-32-23q3-12 4.5-26.5T360-532q0-76-24-144t-68-124q70 28 124 88.5T468-573q-18 32-30.5 69.5T421-429Z"/></svg>
 </div>
 <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Sir s planin</h3>
 <p class="font-body-sm text-body-sm text-on-surface-variant">
@@ -204,7 +198,7 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 </div>
 <div class="p-space-md rounded-xl bg-surface-container-low transition-all hover:bg-surface-container" id="vinska-klet">
 <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-3">
-<span class="material-symbols-outlined text-[22px]">wine_bar</span>
+<svg aria-hidden="true" class="w-[22px] h-[22px] shrink-0" fill="currentColor" viewBox="0 -960 960 960"><path d="M320-120v-60h130v-185q-99-14-154.5-79.5T240-600v-240h480v240q0 90-55.5 155.5T510-365v185h130v60H320Zm280.5-347.5Q652-515 658-570H302q5 55 57 102.5T480-420q69 0 120.5-47.5ZM300-630h360v-150H300v150Zm180 210Z"/></svg>
 </div>
 <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Vina iz Brd in Vipave</h3>
 <p class="font-body-sm text-body-sm text-on-surface-variant">
@@ -258,19 +252,19 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
               </p>
 <ul class="space-y-2.5 pt-2 font-body-sm text-body-sm text-on-surface">
 <li class="flex items-start gap-2.5">
-<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0 text-primary mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="m421-298 283-283-46-45-237 237-120-120-45 45 165 166Zm59 218q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-156t86-127Q252-817 325-848.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Zm0-60q142 0 241-99.5T820-480q0-142-99-241t-241-99q-141 0-240.5 99T140-480q0 141 99.5 240.5T480-140Zm0-340Z"/></svg>
 <span><strong>Predjed:</strong> dimljena postrv s hrenom in kislim jabolkom</span>
 </li>
 <li class="flex items-start gap-2.5">
-<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0 text-primary mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="m421-298 283-283-46-45-237 237-120-120-45 45 165 166Zm59 218q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-156t86-127Q252-817 325-848.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Zm0-60q142 0 241-99.5T820-480q0-142-99-241t-241-99q-141 0-240.5 99T140-480q0 141 99.5 240.5T480-140Zm0-340Z"/></svg>
 <span><strong>Juha:</strong> gobova juha z jurčki in ajdovo kašo</span>
 </li>
 <li class="flex items-start gap-2.5">
-<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0 text-primary mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="m421-298 283-283-46-45-237 237-120-120-45 45 165 166Zm59 218q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-156t86-127Q252-817 325-848.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Zm0-60q142 0 241-99.5T820-480q0-142-99-241t-241-99q-141 0-240.5 99T140-480q0 141 99.5 240.5T480-140Zm0-340Z"/></svg>
 <span><strong>Glavna jed:</strong> cela soška postrv na maslu z žajbljem, krompir z blitvo</span>
 </li>
 <li class="flex items-start gap-2.5">
-<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0 text-primary mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="m421-298 283-283-46-45-237 237-120-120-45 45 165 166Zm59 218q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-156t86-127Q252-817 325-848.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Zm0-60q142 0 241-99.5T820-480q0-142-99-241t-241-99q-141 0-240.5 99T140-480q0 141 99.5 240.5T480-140Zm0-340Z"/></svg>
 <span><strong>Sladica:</strong> kobariški štruklji z orehovim nadevom</span>
 </li>
 </ul>
@@ -306,19 +300,19 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
               </p>
 <ul class="space-y-2.5 pt-2 font-body-sm text-body-sm text-on-surface">
 <li class="flex items-start gap-2.5">
-<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0 text-primary mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="m421-298 283-283-46-45-237 237-120-120-45 45 165 166Zm59 218q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-156t86-127Q252-817 325-848.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Zm0-60q142 0 241-99.5T820-480q0-142-99-241t-241-99q-141 0-240.5 99T140-480q0 141 99.5 240.5T480-140Zm0-340Z"/></svg>
 <span><strong>Predjed:</strong> plošča s planine (tolminc, bovški sir, domača salama in zaseka)</span>
 </li>
 <li class="flex items-start gap-2.5">
-<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0 text-primary mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="m421-298 283-283-46-45-237 237-120-120-45 45 165 166Zm59 218q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-156t86-127Q252-817 325-848.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Zm0-60q142 0 241-99.5T820-480q0-142-99-241t-241-99q-141 0-240.5 99T140-480q0 141 99.5 240.5T480-140Zm0-340Z"/></svg>
 <span><strong>Juha:</strong> ričet s prekajenim rebrcem</span>
 </li>
 <li class="flex items-start gap-2.5">
-<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0 text-primary mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="m421-298 283-283-46-45-237 237-120-120-45 45 165 166Zm59 218q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-156t86-127Q252-817 325-848.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Zm0-60q142 0 241-99.5T820-480q0-142-99-241t-241-99q-141 0-240.5 99T140-480q0 141 99.5 240.5T480-140Zm0-340Z"/></svg>
 <span><strong>Glavna jed:</strong> srnin golaž s polento</span>
 </li>
 <li class="flex items-start gap-2.5">
-<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0 text-primary mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="m421-298 283-283-46-45-237 237-120-120-45 45 165 166Zm59 218q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-156t86-127Q252-817 325-848.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Zm0-60q142 0 241-99.5T820-480q0-142-99-241t-241-99q-141 0-240.5 99T140-480q0 141 99.5 240.5T480-140Zm0-340Z"/></svg>
 <span><strong>Sladica:</strong> bovški krafi s suhimi hruškami, orehi in rozinami, zabeljeni z maslom</span>
 </li>
 </ul>
@@ -406,15 +400,18 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
               Ob koncih tedna in poleti na terasi so mize hitro zasedene, zato priporočamo rezervacijo nekaj dni vnaprej.
             </p>
 </div>
-<form class="space-y-space-md" id="reservationForm">
+<form class="space-y-space-md" data-netlify="true" id="reservationForm" method="POST" name="reservation" netlify-honeypot="bot-field">
+<input name="form-name" type="hidden" value="reservation"/>
+<input id="formLanguage" name="language" type="hidden" value="sl"/>
+<p class="hidden"><label>Ne izpolnjujte tega polja: <input name="bot-field" tabindex="-1"/></label></p>
 <!-- Row 1: Guests and Date -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
 <div class="space-y-1.5">
 <label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="guests">
-<span class="material-symbols-outlined text-[16px] text-primary">group</span>
+<svg aria-hidden="true" class="w-[16px] h-[16px] shrink-0  text-primary" fill="currentColor" viewBox="0 -960 960 960"><path d="M38-160v-94q0-35 18-63.5t50-42.5q73-32 131.5-46T358-420q62 0 120 14t131 46q32 14 50.5 42.5T678-254v94H38Zm700 0v-94q0-63-32-103.5T622-423q69 8 130 23.5t99 35.5q33 19 52 47t19 63v94H738ZM250-523q-42-42-42-108t42-108q42-42 108-42t108 42q42 42 42 108t-42 108q-42 42-108 42t-108-42Zm426 0q-42 42-108 42-11 0-24.5-1.5T519-488q24-25 36.5-61.5T568-631q0-45-12.5-79.5T519-774q11-3 24.5-5t24.5-2q66 0 108 42t42 108q0 66-42 108ZM98-220h520v-34q0-16-9.5-31T585-306q-72-32-121-43t-106-11q-57 0-106.5 11T130-306q-14 6-23 21t-9 31v34Zm324.5-346.5Q448-592 448-631t-25.5-64.5Q397-721 358-721t-64.5 25.5Q268-670 268-631t25.5 64.5Q319-541 358-541t64.5-25.5ZM358-220Zm0-411Z"/></svg>
                   Število gostov
                 </label>
-<select class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="guests">
+<select class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="guests" name="guests">
 <option value="1">1 oseba</option>
 <option selected="" value="2">2 osebi</option>
 <option value="3">3 osebe</option>
@@ -428,20 +425,20 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 </div>
 <div class="space-y-1.5">
 <label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="resDate">
-<span class="material-symbols-outlined text-[16px] text-primary">calendar_today</span>
+<svg aria-hidden="true" class="w-[16px] h-[16px] shrink-0  text-primary" fill="currentColor" viewBox="0 -960 960 960"><path d="M180-80q-24 0-42-18t-18-42v-620q0-24 18-42t42-18h65v-60h65v60h340v-60h65v60h65q24 0 42 18t18 42v620q0 24-18 42t-42 18H180Zm0-60h600v-430H180v430Zm0-490h600v-130H180v130Zm0 0v-130 130Z"/></svg>
                   Datum obiska
                 </label>
-<input class="w-full min-w-0 px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="resDate" type="date" value="2026-10-02"/>
+<input class="w-full min-w-0 px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="resDate" name="date" required="" type="date" value="2026-10-02"/>
 </div>
 </div>
 <!-- Row 2: Seating & Seating Preference -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
 <div class="space-y-1.5">
 <label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="timeSlot">
-<span class="material-symbols-outlined text-[16px] text-primary">schedule</span>
+<svg aria-hidden="true" class="w-[16px] h-[16px] shrink-0  text-primary" fill="currentColor" viewBox="0 -960 960 960"><path d="m627-287 45-45-159-160v-201h-60v225l174 181ZM480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-82 31.5-155t86-127.5Q252-817 325-848.5T480-880q82 0 155 31.5t127.5 86Q817-708 848.5-635T880-480q0 82-31.5 155t-86 127.5Q708-143 635-111.5T480-80Zm0-400Zm0 340q140 0 240-100t100-240q0-140-100-240T480-820q-140 0-240 100T140-480q0 140 100 240t240 100Z"/></svg>
                   Ura
                 </label>
-<select class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="timeSlot">
+<select class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="timeSlot" name="time">
 <optgroup label="Kosilo">
 <option value="12:00">12:00</option>
 <option value="12:30">12:30</option>
@@ -460,13 +457,13 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 </div>
 <div class="space-y-1.5">
 <label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="seatingArea">
-<span class="material-symbols-outlined text-[16px] text-primary">deck</span>
+<svg aria-hidden="true" class="w-[16px] h-[16px] shrink-0  text-primary" fill="currentColor" viewBox="0 -960 960 960"><path d="M450-80v-520H80l400-280 400 280H510v520h-60Zm30-580h210-420 210ZM120-80v-211L88-466l58-10 32 166h162v230h-60v-170H180v170h-60Zm500 0v-230h162l32-166 58 10-32 175v211h-60v-170H680v170h-60ZM270-660h420L480-807 270-660Z"/></svg>
                   Kje bi radi sedeli
                 </label>
-<select class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="seatingArea">
-<option selected="" value="terrace">Na terasi ob reki</option>
-<option value="fireplace">Ob kaminu</option>
-<option value="first_available">Vseeno</option>
+<select class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="seatingArea" name="seating">
+<option selected="" value="terasa">Na terasi ob reki</option>
+<option value="kamin">Ob kaminu</option>
+<option value="vseeno">Vseeno</option>
 </select>
 </div>
 </div>
@@ -474,11 +471,11 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
 <div class="space-y-1.5">
 <label class="font-label-sm text-label-sm text-on-surface font-semibold" for="fullName">Ime in priimek</label>
-<input class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="fullName" placeholder="Janez Novak" required="" type="text"/>
+<input class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="fullName" name="name" placeholder="Janez Novak" required="" type="text"/>
 </div>
 <div class="space-y-1.5">
 <label class="font-label-sm text-label-sm text-on-surface font-semibold" for="phone">Telefonska številka</label>
-<input class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="phone" placeholder="+386 41 000 000" required="" type="tel"/>
+<input class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="phone" name="phone" placeholder="+386 41 000 000" required="" type="tel"/>
 </div>
 </div>
 <!-- Row 4: Special Diet & Notes -->
@@ -487,21 +484,20 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 <span>Alergije in želje</span>
 <span class="font-caption text-caption text-on-surface-variant font-normal">Neobvezno</span>
 </label>
-<textarea class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="dietary" placeholder="Npr. otroški stolček, 1× brez glutena, rojstni dan …" rows="2"></textarea>
+<textarea class="w-full px-4 py-3 bg-surface text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="dietary" name="notes" placeholder="Npr. otroški stolček, 1× brez glutena, rojstni dan …" rows="2"></textarea>
 </div>
 <!-- Submit Button -->
 <div class="pt-space-xs">
-<button class="w-full inline-flex items-center justify-center font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container hover:text-on-primary-container rounded-full py-4 shadow-lg shadow-primary/25 transition-all" type="submit">
-<span class="material-symbols-outlined text-[20px] mr-2">send</span>
+<button class="w-full inline-flex items-center justify-center font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container hover:text-on-primary-container rounded-full py-4 shadow-lg shadow-primary/25 transition-all disabled:opacity-60" id="reservationSubmit" type="submit">
+<svg aria-hidden="true" class="w-[20px] h-[20px] shrink-0  mr-2" fill="currentColor" viewBox="0 -960 960 960"><path d="M120-160v-640l760 320-760 320Zm60-93 544-227-544-230v168l242 62-242 60v167Zm0 0v-457 457Z"/></svg>
                 Pošljite povpraševanje
               </button>
 </div>
 <!-- Confirmation Toast (Hidden by default) -->
 <div class="hidden p-4 rounded-lg bg-primary-container text-on-primary-container flex items-center gap-3" id="confirmationBanner" role="status">
-<span class="material-symbols-outlined text-[24px]">task_alt</span>
-<p class="font-body-sm text-body-sm font-medium" id="confirmationText">
-                Hvala! To je demo stran, zato povpraševanje ni bilo poslano. Na pravi strani bi vas poklicali in mizo potrdili še isti dan.
-              </p>
+<svg aria-hidden="true" class="w-[24px] h-[24px] shrink-0" fill="currentColor" id="confirmIconOk" viewBox="0 -960 960 960"><path d="M480-80q-85 0-158-30.5T195-195q-54-54-84.5-127T80-480q0-84 30.5-157T195-764q54-54 127-85t158-31q75 0 140 24t117 66l-43 43q-44-35-98-54t-116-19q-145 0-242.5 97.5T140-480q0 145 97.5 242.5T480-140q145 0 242.5-97.5T820-480q0-30-4.5-58.5T802-594l46-46q16 37 24 77t8 83q0 85-31 158t-85 127q-54 54-127 84.5T480-80Zm-59-218L256-464l45-45 120 120 414-414 46 45-460 460Z"/></svg>
+<svg aria-hidden="true" class="w-[24px] h-[24px] shrink-0 hidden" fill="currentColor" id="confirmIconErr" viewBox="0 -960 960 960"><path d="M503.5-289.48q9.5-9.48 9.5-23.5t-9.48-23.52q-9.48-9.5-23.5-9.5t-23.52 9.48q-9.5 9.48-9.5 23.5t9.48 23.52q9.48 9.5 23.5 9.5t23.52-9.48ZM453-433h60v-253h-60v253Zm27.27 353q-82.74 0-155.5-31.5Q252-143 197.5-197.5t-86-127.34Q80-397.68 80-480.5t31.5-155.66Q143-709 197.5-763t127.34-85.5Q397.68-880 480.5-880t155.66 31.5Q709-817 763-763t85.5 127Q880-563 880-480.27q0 82.74-31.5 155.5Q817-252 763-197.68q-54 54.31-127 86Q563-80 480.27-80Zm.23-60Q622-140 721-239.5t99-241Q820-622 721.19-721T480-820q-141 0-240.5 98.81T140-480q0 141 99.5 240.5t241 99.5Zm-.5-340Z"/></svg>
+<p class="font-body-sm text-body-sm font-medium" id="confirmationText"></p>
 </div>
 </form>
 </div>
@@ -512,7 +508,7 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 <div class="w-full h-52 bg-cover bg-center relative" data-location="Kobarid, Dolina Soce, Slovenia" style="background-image: url('img/zemljevid.png'), url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23e5eeff%22/%3E%3Cpath d=%22M-10 40 L120 60 L260 30 L410 70 M60 -10 L90 210 M300 -10 L280 210%22 stroke=%22%23ffffff%22 stroke-width=%226%22 fill=%22none%22/%3E%3Cpath d=%22M-10 150 C80 110 140 190 220 140 S340 90 410 120%22 stroke=%22%236bd8cb%22 stroke-width=%2214%22 fill=%22none%22/%3E%3C/svg%3E');">
 <div class="absolute inset-0 bg-on-surface/20 flex items-center justify-center">
 <span class="px-4 py-2 rounded-full bg-surface-container-lowest/90 backdrop-blur-md font-label-sm text-label-sm text-on-surface flex items-center gap-1.5 shadow-md">
-<span class="material-symbols-outlined text-primary text-[18px]">pin_drop</span>
+<svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0 text-primary" fill="currentColor" viewBox="0 -960 960 960"><path d="M480-276q109-83 164.5-169.5T700-600q0-97-61.5-158.5T480-820q-97 0-158.5 61.5T260-600q0 67 55.5 153.5T480-276Zm0 76Q338-303 269-406t-69-194q0-123 78.5-201.5T480-880q123 0 201.5 78.5T760-600q0 91-69 194T480-200Zm-1-320q34 0 57.5-23.5T560-600q0-33-23.5-56.5T479-680q-33 0-56 23.5T400-600q0 33 23 56.5t56 23.5ZM200-80v-60h560v60H200Zm280-520Z"/></svg>
                   Pod Gorko 12, 5222 Kobarid
                 </span>
 </div>
@@ -521,21 +517,21 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 <h3 class="font-headline-sm text-headline-sm text-on-surface">Kako do nas</h3>
 <div class="space-y-3 font-body-sm text-body-sm text-on-surface-variant">
 <div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">local_parking</span>
+<svg aria-hidden="true" class="w-[20px] h-[20px] shrink-0 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="M240-120v-720h288q98 0 165 67t67 165q0 98-67 165t-165 67H360v256H240Zm120-376h168q48 0 80-32t32-80q0-48-32-80t-80-32H360v224Z"/></svg>
 <div>
 <span class="text-on-surface font-semibold">Brezplačno parkirišče</span>
 <p class="font-caption text-caption">Parkirate lahko tik ob gostilni.</p>
 </div>
 </div>
 <div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">pedal_bike</span>
+<svg aria-hidden="true" class="w-[20px] h-[20px] shrink-0 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="M194-160q-81 0-137.5-57T0-355q0-81 57.04-137.5T195-549q71 0 124.5 45.5T384-388h51l-82-232h-73v-60h188v60h-52l26 71h222l-71-191H488v-60h99q24 0 40.5 11t24.5 33l76 207h38q80.51 0 137.26 56.23Q960-436.53 960-356.75 960-276 903.74-218T766-160q-71.6 0-125.8-48T574-328H384q-11 72-64.5 120T194-160Zm0-60q48 0 83.5-31t47.5-77H206v-60h119q-12-45-48-73t-82-28q-56 0-95.5 39T60-355q0 56.25 39 95.62Q138-220 194-220Zm305-168h76q4-23 15.5-51t31.5-50H463l36 101Zm267 168q56 0 95-39.38 39-39.37 39-95.62 0-56-39-95t-95-39h-16l39 113-56 19-43-112q-29 17-43.5 48T632-355q0 56.25 39 95.62Q710-220 766-220ZM193-355Zm573 0Z"/></svg>
 <div>
 <span class="text-on-surface font-semibold">Kolesarji in raftarji</span>
 <p class="font-caption text-caption">Pokrito stojalo za kolesa. Po raftingu ali pohodu pridite kar v športni opremi.</p>
 </div>
 </div>
 <div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">pets</span>
+<svg aria-hidden="true" class="w-[20px] h-[20px] shrink-0 text-primary shrink-0 mt-0.5" fill="currentColor" viewBox="0 -960 960 960"><path d="M169.86-485Q132-485 106-511.14t-26-64Q80-613 106.14-639t64-26Q208-665 234-638.86t26 64Q260-537 233.86-511t-64 26ZM291-681.14q-26-26.14-26-64T291.14-809q26.14-26 64-26T419-808.86q26 26.14 26 64T418.86-681q-26.14 26-64 26T291-681.14Zm250 0q-26-26.14-26-64T541.14-809q26.14-26 64-26T669-808.86q26 26.14 26 64T668.86-681q-26.14 26-64 26T541-681.14ZM789.86-485Q752-485 726-511.14t-26-64Q700-613 726.14-639t64-26Q828-665 854-638.86t26 64Q880-537 853.86-511t-64 26ZM266-75q-42 0-69-31.53-27-31.52-27-74.47 0-42 25.5-74.5T250-318q22-22 41-46.5t36-50.5q29-44 65-82t88-38q52 0 88.5 38t65.5 83q17 26 35.5 50t40.5 46q29 30 54.5 62.5T790-181q0 42.95-27 74.47Q736-75 694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>
 <div>
 <span class="text-on-surface font-semibold">Psi so dobrodošli</span>
 <p class="font-caption text-caption">Na terasi jim prinesemo skledo vode.</p>
@@ -548,14 +544,14 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 <div class="p-space-md rounded-xl bg-surface-container text-on-surface space-y-2">
 <div class="flex items-center justify-between">
 <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Praznovanja</span>
-<span class="material-symbols-outlined text-on-surface-variant text-[20px]">celebration</span>
+<svg aria-hidden="true" class="w-[20px] h-[20px] shrink-0 text-on-surface-variant" fill="currentColor" viewBox="0 -960 960 960"><path d="m80-80 186-520 337 333L80-80Zm101-101 314-112-203-204-111 316Zm376-264-34-34 240-240q32-32 81-32.5t81 31.5l17 17-34 34-19-19q-19-19-44-19.5T800-688L557-445ZM398-600l-34-34 30-30q23-23 21.5-52.5T394-766l-28-28 34-34 26 26q35 35 34.5 87.5T425-627l-27 27Zm81 77-34-34 152-152q19-19 18.5-48.5T596-806l-61-61 34-34 63 63q31 32 32 80.5T633-677L479-523Zm158 159-34-34 47-47q35-35 84-36t84 34l51 51-34 34-52-52q-23-23-48-23t-48 23l-50 50ZM181-181Z"/></svg>
 </div>
 <p class="font-body-sm text-body-sm text-on-surface-variant">
               Krst, obhajilo, rojstni dan ali obletnica? Za skupine do 60 oseb pripravimo meni po dogovoru. Pokličite Ano.
             </p>
 <div class="pt-1">
 <a class="font-label-md text-label-md text-primary hover:underline inline-flex items-center gap-1.5" href="tel:+38650000000">
-<span class="material-symbols-outlined text-[18px]">call</span>
+<svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0" fill="currentColor" viewBox="0 -960 960 960"><path d="M795-120q-116 0-236.5-56T335-335Q232-438 176-558.5T120-795q0-19.29 12.86-32.14Q145.71-840 165-840h140q14 0 24 10t14 25l26.93 125.64Q372-665 369.5-653.5t-10.73 19.73L259-533q26 44 55 82t64 72q37 38 78 69.5t86 55.5l95-98q10-11 23.15-15 13.15-4 25.85-2l119 26q15 4 25 16.04 10 12.05 10 26.96v135q0 19.29-12.86 32.14Q814.29-120 795-120ZM229-588l81-82-23-110H180q2 42 13.5 88.5T229-588Zm369 363q41 19 89 31t93 14v-107l-103-21-79 83ZM229-588Zm369 363Z"/></svg>
                 +386 (0)5 000 00 00
               </a>
 </div>
@@ -564,7 +560,7 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 </div>
 </div>
 </section>
-</div></main><footer class="w-full bg-surface-container-low text-on-surface py-space-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-[1360px] mx-auto px-margin-lg"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter-lg pb-space-xl"><div class="space-y-space-md"><div class="space-y-1"><h3 class="font-headline-sm text-headline-sm text-on-surface">Gostilna Pri Brvi</h3><p class="font-label-sm text-label-sm uppercase tracking-wider text-primary">Kobarid • Dolina Soče • Julijske Alpe</p></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Družinska gostilna ob brvi čez Sočo. Domača kuhinja Zgornjega Posočja od leta 1962.</p><div class="pt-space-xs"><div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[18px]">water_drop</span><span>Terasa ob reki Soči</span></div></div></div><div class="space-y-space-md"><h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Odpiralni čas</h4><div class="space-y-2 font-body-sm text-body-sm text-on-surface-variant"><div class="flex justify-between pb-1"><span class="font-medium text-on-surface">Sreda–petek</span><span>11:00–22:00</span></div><div class="flex justify-between pb-1"><span class="font-medium text-on-surface">Sobota–nedelja</span><span>11:00–23:00</span></div><div class="flex justify-between pb-1"><span class="font-medium text-on-surface">Ponedeljek–torek</span><span class="text-tertiary">Zaprto</span></div><p class="font-caption text-caption text-on-surface-variant pt-2">Kuhinja sprejema naročila do ene ure pred zaprtjem.</p></div></div><div class="space-y-space-md"><h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Kontakt</h4><div class="space-y-3"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[18px]">call</span></div><div><p class="font-label-sm text-label-sm text-on-surface font-semibold">+386 (0)5 000 00 00</p><p class="font-caption text-caption text-on-surface-variant">Rezervacije in skupine</p></div></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[18px]">mail</span></div><div><p class="font-label-sm text-label-sm text-on-surface font-semibold">rezervacije@pribrvi.example</p><p class="font-caption text-caption text-on-surface-variant">Odgovorimo v enem dnevu</p></div></div><div class="pt-2 font-body-sm text-body-sm text-on-surface-variant space-y-1"><p>Pod Gorko 12, 5222 Kobarid</p></div></div></div><div class="space-y-space-md"><h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface">E-novice</h4><p class="font-body-sm text-body-sm text-on-surface-variant">Obvestila o sezonskih jedeh, martinovanju in drugih dogodkih v gostilni.</p><div class="space-y-2"><div class="flex gap-2"><input aria-label="E-poštni naslov" class="w-full min-w-0 px-space-md py-space-sm bg-surface text-on-surface rounded-lg font-body-sm text-body-sm placeholder:text-outline focus:outline-none" id="newsletterEmail" placeholder="Vaš e-poštni naslov" type="email"/><button aria-label="Prijava na e-novice" class="bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container px-space-md py-space-sm rounded-lg font-label-md text-label-md transition-colors" id="newsletterButton" type="button"><span class="material-symbols-outlined text-[18px]">send</span></button></div><p class="font-caption text-caption text-on-surface-variant" id="newsletterNote" role="status">Z naročilom se strinjate s pravili o varstvu osebnih podatkov.</p></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md font-caption text-caption text-on-surface-variant"><p>© 2026 Gostilna Pri Brvi d.o.o. Vse pravice pridržane. · Demo stran: gostilna, jedilnik in kontakti so izmišljeni.</p><div class="flex flex-wrap justify-center items-center gap-x-space-lg gap-y-1"><a class="hover:text-on-surface transition-colors" href="#top">Zasebnost in piškotki</a><a class="hover:text-on-surface transition-colors" href="#top">Dostopnost</a><a class="hover:text-on-surface transition-colors" href="#rezervacija">Kako do nas</a></div></div></div></footer>
+</div></main><footer class="w-full bg-surface-container-low text-on-surface py-space-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-[1360px] mx-auto px-margin-lg"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter-lg pb-space-xl"><div class="space-y-space-md"><div class="space-y-1"><h3 class="font-headline-sm text-headline-sm text-on-surface">Gostilna Pri Brvi</h3><p class="font-label-sm text-label-sm uppercase tracking-wider text-primary">Kobarid • Dolina Soče • Julijske Alpe</p></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Družinska gostilna ob brvi čez Sočo. Domača kuhinja Zgornjega Posočja od leta 1962.</p><div class="pt-space-xs"><div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm"><svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0 text-primary" fill="currentColor" viewBox="0 -960 960 960"><path d="M479-208q16 0 24.5-5.5T512-230q0-11-8.5-17t-25.5-6q-42 0-85.5-26.5T337-373q-2-9-9-14.5t-15-5.5q-11 0-17 8.5t-4 17.5q15 84 71 121.5T479-208Zm-227.5 34Q160-268 160-408q0-100 79.5-217.5T480-880q161 137 240.5 254.5T800-408q0 140-91.5 234T480-80q-137 0-228.5-94ZM666-216.5Q740-293 740-408q0-79-66.5-179.5T480-800Q353-688 286.5-587.5T220-408q0 115 74 191.5T480-140q112 0 186-76.5ZM480-480Z"/></svg><span>Terasa ob reki Soči</span></div></div></div><div class="space-y-space-md"><h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Odpiralni čas</h4><div class="space-y-2 font-body-sm text-body-sm text-on-surface-variant"><div class="flex justify-between pb-1"><span class="font-medium text-on-surface">Sreda–petek</span><span>11:00–22:00</span></div><div class="flex justify-between pb-1"><span class="font-medium text-on-surface">Sobota–nedelja</span><span>11:00–23:00</span></div><div class="flex justify-between pb-1"><span class="font-medium text-on-surface">Ponedeljek–torek</span><span class="text-tertiary">Zaprto</span></div><p class="font-caption text-caption text-on-surface-variant pt-2">Kuhinja sprejema naročila do ene ure pred zaprtjem.</p></div></div><div class="space-y-space-md"><h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface">Kontakt</h4><div class="space-y-3"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary"><svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0" fill="currentColor" viewBox="0 -960 960 960"><path d="M795-120q-116 0-236.5-56T335-335Q232-438 176-558.5T120-795q0-19.29 12.86-32.14Q145.71-840 165-840h140q14 0 24 10t14 25l26.93 125.64Q372-665 369.5-653.5t-10.73 19.73L259-533q26 44 55 82t64 72q37 38 78 69.5t86 55.5l95-98q10-11 23.15-15 13.15-4 25.85-2l119 26q15 4 25 16.04 10 12.05 10 26.96v135q0 19.29-12.86 32.14Q814.29-120 795-120ZM229-588l81-82-23-110H180q2 42 13.5 88.5T229-588Zm369 363q41 19 89 31t93 14v-107l-103-21-79 83ZM229-588Zm369 363Z"/></svg></div><div><p class="font-label-sm text-label-sm text-on-surface font-semibold">+386 (0)5 000 00 00</p><p class="font-caption text-caption text-on-surface-variant">Rezervacije in skupine</p></div></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary"><svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0" fill="currentColor" viewBox="0 -960 960 960"><path d="M140-160q-24 0-42-18t-18-42v-520q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H140Zm340-302L140-685v465h680v-465L480-462Zm0-60 336-218H145l335 218ZM140-685v-55 520-465Z"/></svg></div><div><p class="font-label-sm text-label-sm text-on-surface font-semibold">rezervacije@pribrvi.example</p><p class="font-caption text-caption text-on-surface-variant">Odgovorimo v enem dnevu</p></div></div><div class="pt-2 font-body-sm text-body-sm text-on-surface-variant space-y-1"><p>Pod Gorko 12, 5222 Kobarid</p></div></div></div><div class="space-y-space-md"><h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface">E-novice</h4><p class="font-body-sm text-body-sm text-on-surface-variant">Obvestila o sezonskih jedeh, martinovanju in drugih dogodkih v gostilni.</p><form class="space-y-2" data-netlify="true" id="newsletterForm" method="POST" name="newsletter" netlify-honeypot="bot-field"><input name="form-name" type="hidden" value="newsletter"/><p class="hidden"><label>Ne izpolnjujte tega polja: <input name="bot-field" tabindex="-1"/></label></p><div class="flex gap-2"><input aria-label="E-poštni naslov" class="w-full min-w-0 px-space-md py-space-sm bg-surface text-on-surface rounded-lg font-body-sm text-body-sm placeholder:text-outline focus:outline-none" id="newsletterEmail" name="email" placeholder="Vaš e-poštni naslov" required="" type="email"/><button aria-label="Prijava na e-novice" class="bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container px-space-md py-space-sm rounded-lg font-label-md text-label-md transition-colors disabled:opacity-60" id="newsletterButton" type="submit"><svg aria-hidden="true" class="w-[18px] h-[18px] shrink-0" fill="currentColor" viewBox="0 -960 960 960"><path d="M120-160v-640l760 320-760 320Zm60-93 544-227-544-230v168l242 62-242 60v167Zm0 0v-457 457Z"/></svg></button></div><p class="font-caption text-caption text-on-surface-variant" id="newsletterNote" role="status">Z naročilom se strinjate s pravili o varstvu osebnih podatkov.</p></form></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md font-caption text-caption text-on-surface-variant"><p>© 2026 Gostilna Pri Brvi d.o.o. Vse pravice pridržane. · Demo stran: gostilna, jedilnik in kontakti so izmišljeni.</p><div class="flex flex-wrap justify-center items-center gap-x-space-lg gap-y-1"><a class="hover:text-on-surface transition-colors" href="#top">Zasebnost in piškotki</a><a class="hover:text-on-surface transition-colors" href="#top">Dostopnost</a><a class="hover:text-on-surface transition-colors" href="#rezervacija">Kako do nas</a></div></div></div></footer>
 <script>
 (function () {
   "use strict";
@@ -662,7 +658,7 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
     "Neobvezno": ["Optional", "Facoltativo"],
     "Npr. otroški stolček, 1× brez glutena, rojstni dan …": ["E.g. high chair, 1× gluten-free, birthday …", "Es. seggiolone, 1× senza glutine, compleanno …"],
     "Pošljite povpraševanje": ["Send request", "Invia la richiesta"],
-    "Hvala! To je demo stran, zato povpraševanje ni bilo poslano. Na pravi strani bi vas poklicali in mizo potrdili še isti dan.": ["Thank you! This is a demo site, so your request was not sent. On a live site we would call you and confirm your table the same day.", "Grazie! Questo è un sito dimostrativo, quindi la richiesta non è stata inviata. Su un sito reale ti chiameremmo per confermare il tavolo in giornata."],
+    "Ne izpolnjujte tega polja:": ["Leave this field empty:", "Lascia vuoto questo campo:"],
     "Kako do nas": ["Getting here", "Come arrivare"],
     "Brezplačno parkirišče": ["Free parking", "Parcheggio gratuito"],
     "Parkirate lahko tik ob gostilni.": ["You can park right next to the inn.", "Si parcheggia proprio accanto all'osteria."],
@@ -703,9 +699,33 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
   };
   // Messages written by script
   var M = {
-    sl: { invalid: "Vpišite veljaven e-poštni naslov.", saved: "To je demo stran, zato prijava ni bila shranjena.", soca: "Meni: Soški meni", nona: "Meni: Nonin meni" },
-    en: { invalid: "Please enter a valid email address.", saved: "This is a demo site, so your subscription was not saved.", soca: "Menu: Soča menu", nona: "Menu: Nona's menu" },
-    it: { invalid: "Inserisci un indirizzo e-mail valido.", saved: "Questo è un sito dimostrativo, quindi l'iscrizione non è stata salvata.", soca: "Menù: Menù dell'Isonzo", nona: "Menù: Menù della nonna" }
+    sl: {
+      resSent: "Hvala! Povpraševanje smo prejeli. Poklicali vas bomo in mizo potrdili še isti dan.",
+      resFailed: "Povpraševanja ni bilo mogoče poslati. Poskusite znova ali nas pokličite na +386 (0)5 000 00 00.",
+      resPreview: "To je predogled, zato povpraševanje ni bilo poslano. Ko je stran objavljena na Netlifyju, obrazec deluje.",
+      nlSent: "Hvala, prijavljeni ste na e-novice.",
+      nlFailed: "Prijava ni uspela. Poskusite znova.",
+      nlPreview: "To je predogled, zato prijava ni bila shranjena.",
+      soca: "Meni: Soški meni", nona: "Meni: Nonin meni"
+    },
+    en: {
+      resSent: "Thank you! We've received your request. We'll call you to confirm your table the same day.",
+      resFailed: "Your request couldn't be sent. Please try again or call us on +386 (0)5 000 00 00.",
+      resPreview: "This is a preview, so your request was not sent. The form works once the site is published on Netlify.",
+      nlSent: "Thanks, you're subscribed to the newsletter.",
+      nlFailed: "Subscription failed. Please try again.",
+      nlPreview: "This is a preview, so your subscription was not saved.",
+      soca: "Menu: Soča menu", nona: "Menu: Nona's menu"
+    },
+    it: {
+      resSent: "Grazie! Abbiamo ricevuto la tua richiesta. Ti chiameremo per confermare il tavolo in giornata.",
+      resFailed: "Non è stato possibile inviare la richiesta. Riprova o chiamaci al +386 (0)5 000 00 00.",
+      resPreview: "Questa è un'anteprima, quindi la richiesta non è stata inviata. Il modulo funziona quando il sito è pubblicato su Netlify.",
+      nlSent: "Grazie per l'iscrizione alla newsletter.",
+      nlFailed: "Iscrizione non riuscita. Riprova.",
+      nlPreview: "Questa è un'anteprima, quindi l'iscrizione non è stata salvata.",
+      soca: "Menù: Menù dell'Isonzo", nona: "Menù: Menù della nonna"
+    }
   };
   var COL = { en: 0, it: 1 };
   var lang = "sl";
@@ -715,7 +735,7 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
   var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
     acceptNode: function (n) {
       var p = n.parentElement;
-      if (!p || p.closest("script, style, .material-symbols-outlined")) return NodeFilter.FILTER_REJECT;
+      if (!p || p.closest("script, style, svg")) return NodeFilter.FILTER_REJECT;
       return T.hasOwnProperty(n.nodeValue.trim()) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
     }
   });
@@ -729,7 +749,7 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
 
   function tr(sl) { return lang === "sl" ? sl : T[sl][COL[lang]]; }
 
-  var newsletterState = null;
+  var resState = null, nlState = null;
   var note = document.getElementById("newsletterNote");
   var noteDefault = note.textContent;
 
@@ -744,26 +764,68 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
     document.querySelectorAll("[data-lang]").forEach(function (b) {
       b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false");
     });
-    note.textContent = newsletterState ? M[lang][newsletterState] : tr(noteDefault);
+    document.getElementById("formLanguage").value = lang;
+    renderForms();
     try { localStorage.setItem("pribrvi-lang", lang); } catch (e) {}
   }
   document.querySelectorAll("[data-lang]").forEach(function (b) {
     b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
   });
 
-  /* ---------- reservation (demo, nothing is sent) ---------- */
+  /* ---------- forms: sent to Netlify Forms ---------- */
+  // The Claude preview sets PRI_BRVI_PREVIEW, where there is no Netlify to receive the forms.
+  var PREVIEW = window.PRI_BRVI_PREVIEW === true;
+  function send(form) {
+    if (PREVIEW) return Promise.resolve("Preview");
+    return fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(new FormData(form)).toString()
+    }).then(function (r) { return r.ok ? "Sent" : "Failed"; }, function () { return "Failed"; });
+  }
+
+  function renderForms() {
+    note.textContent = nlState ? M[lang]["nl" + nlState] : tr(noteDefault);
+    if (!resState) return;
+    var banner = document.getElementById("confirmationBanner"), bad = resState === "Failed";
+    document.getElementById("confirmationText").textContent = M[lang]["res" + resState];
+    banner.classList.remove("hidden");
+    banner.classList.toggle("bg-primary-container", !bad);
+    banner.classList.toggle("text-on-primary-container", !bad);
+    banner.classList.toggle("bg-error-container", bad);
+    banner.classList.toggle("text-on-error-container", bad);
+    document.getElementById("confirmIconOk").classList.toggle("hidden", bad);
+    document.getElementById("confirmIconErr").classList.toggle("hidden", !bad);
+  }
+
   // Default the visit date to the next Wednesday–Sunday, at least 3 days ahead (the page recommends booking a few days in advance).
   var dateInput = document.getElementById("resDate");
-  var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + 3);
-  while (d.getDay() === 1 || d.getDay() === 2) d.setDate(d.getDate() + 1);
   function iso(x) { return x.getFullYear() + "-" + String(x.getMonth() + 1).padStart(2, "0") + "-" + String(x.getDate()).padStart(2, "0"); }
-  var today = new Date(); today.setHours(0, 0, 0, 0);
-  dateInput.min = iso(today);
-  dateInput.value = iso(d);
+  function setDefaultDate() {
+    var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + 3);
+    while (d.getDay() === 1 || d.getDay() === 2) d.setDate(d.getDate() + 1);
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    dateInput.min = iso(today);
+    dateInput.value = iso(d);
+  }
+  setDefaultDate();
 
-  document.getElementById("reservationForm").addEventListener("submit", function (e) {
+  var resForm = document.getElementById("reservationForm");
+  resForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    document.getElementById("confirmationBanner").classList.remove("hidden");
+    var btn = document.getElementById("reservationSubmit");
+    btn.disabled = true;
+    document.getElementById("formLanguage").value = lang;
+    send(resForm).then(function (state) {
+      if (state === "Sent") {
+        resForm.reset();
+        setDefaultDate();
+        document.getElementById("formLanguage").value = lang;
+      }
+      resState = state;
+      renderForms();
+      btn.disabled = false;
+    });
   });
 
   // "Choose this menu" buttons prefill the notes.
@@ -776,17 +838,17 @@ header.fixed{padding-top:env(safe-area-inset-top,0px);}
     });
   });
 
-  // Newsletter: demo only.
-  document.getElementById("newsletterButton").addEventListener("click", function () {
-    var email = document.getElementById("newsletterEmail");
-    if (!email.value || !email.checkValidity()) {
-      newsletterState = "invalid";
-      note.textContent = M[lang].invalid;
-      email.focus();
-      return;
-    }
-    newsletterState = "saved";
-    note.textContent = M[lang].saved;
+  var nlForm = document.getElementById("newsletterForm");
+  nlForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = document.getElementById("newsletterButton");
+    btn.disabled = true;
+    send(nlForm).then(function (state) {
+      if (state === "Sent") nlForm.reset();
+      nlState = state;
+      renderForms();
+      btn.disabled = false;
+    });
   });
 
   var saved = null;
