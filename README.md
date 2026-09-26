@@ -1,6 +1,6 @@
 # Gostilna Pri Brvi
 
-Demo website for a fictional gostilna in the Soča valley. The gostilna, its menus, awards and contact details are made up.
+Demo website for a fictional gostilna in the Soča valley. The gostilna, its menus and contact details are made up.
 
 | File | What it is |
 | --- | --- |
@@ -12,11 +12,12 @@ Demo website for a fictional gostilna in the Soča valley. The gostilna, its men
 The markup and design follow the reference "Restavracija Soča" UI. Changes from the original:
 
 - The name is Gostilna Pri Brvi, and the river flow widget in the hero is removed.
+- All text is rewritten for a family gostilna: no awards, chef or tasting menus; two 4-course gostilna menus; corrected facts (Tolminc is a cow's milk cheese, Rebula, no Karst or Triglav in Kobarid); Slovenian sentence case; Slovenian alt text.
 - Tailwind is compiled into `styles.css` instead of loaded from the play CDN (`cdn.tailwindcss.com`), which isn't meant for production.
 - The navigation links scroll to their sections, and the "Izberite ta meni" buttons add the chosen menu to the reservation notes.
 - The reservation date defaults to the next open day (Wednesday–Sunday), at least 3 days ahead.
 - The confirmation banner and the newsletter field say plainly that this is a demo and nothing was sent.
-- Phone and email are placeholders, and the footer notes that the restaurant, awards and contacts are fictional.
+- Phone and email are placeholders, and the footer notes that the gostilna, menu and contacts are fictional.
 - If a photo can't load, a stand-in appears instead of a broken image: a drawn river landscape in the hero, and a teal panel with an icon elsewhere.
 - Small mobile fixes: smaller headline sizes on phones (using the UI's own `*-mobile` type tokens) and wrapping so nothing overflows sideways.
 
