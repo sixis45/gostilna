@@ -219,10 +219,6 @@
     "Where you'll sit",
     "Dove ti siederai"
   ],
-  "Poleti sedimo na terasi nad reko, v hladnejših dneh ob kaminu, večje družbe pa za dolgo mizo ob kuhinji.": [
-    "In summer on the terrace above the river, on cooler days by the fireplace, and larger groups at the long table by the kitchen.",
-    "D'estate sulla terrazza sopra il fiume, nei giorni più freschi accanto al camino, e i gruppi più numerosi al tavolo lungo vicino alla cucina."
-  ],
   "Terasa": [
     "Terrace",
     "Terrazza"
@@ -242,18 +238,6 @@
   "Kamniti zidovi, macesnov strop in kamin, v katerem gorijo bukova drva. Tu je prijetno, ko se zvečer ohladi.": [
     "Stone walls, a larch ceiling and a fireplace burning beech logs. The place to be when the evenings turn cool.",
     "Muri in pietra, soffitto in larice e un camino dove ardono ceppi di faggio. Il posto giusto quando la sera rinfresca."
-  ],
-  "Do 8 oseb": [
-    "Up to 8 people",
-    "Fino a 8 persone"
-  ],
-  "Dolga miza ob kuhinji": [
-    "The long table by the kitchen",
-    "Il tavolo lungo vicino alla cucina"
-  ],
-  "Za družine in družbe. Luka vam pove, kaj je danes v loncih, in jedi prinese kar iz kuhinje.": [
-    "For families and groups. Luka tells you what's in the pots today and brings the dishes straight from the kitchen.",
-    "Per famiglie e compagnie. Luka ti racconta cosa bolle in pentola oggi e porta i piatti direttamente dalla cucina."
   ],
   "Rezervacija": [
     "Reservations",
@@ -511,10 +495,6 @@
     "Inside the inn, with stone walls and a fireplace",
     "L'interno dell'osteria con muri in pietra e camino"
   ],
-  "Postrv na mizi ob oknu z razgledom na reko": [
-    "Trout on a table by the window overlooking the river",
-    "Trota su un tavolo vicino alla finestra con vista sul fiume"
-  ],
   "Preskoči na vsebino": [
     "Skip to content",
     "Vai al contenuto"
@@ -570,5 +550,25 @@
   "Pravila zasebnosti": [
     "Privacy policy",
     "Informativa sulla privacy"
+  ],
+  "Za skupine": [
+    "For groups",
+    "Per gruppi"
+  ],
+  "Jedilnica z razgledom": [
+    "Dining room with a view",
+    "Sala con vista"
+  ],
+  "Leseni tramovi, velika okna proti reki in mize, ki jih za večje družbe zložimo v dolgo mizo.": [
+    "Wooden beams, big windows facing the river, and tables we join into one long table for larger groups.",
+    "Travi in legno, grandi finestre sul fiume e tavoli che uniamo in un'unica tavolata per i gruppi."
+  ],
+  "Poleti sedimo na terasi nad reko, v hladnejših dneh ob kaminu, večje družbe pa za dolgo mizo v jedilnici.": [
+    "In summer on the terrace above the river, on cooler days by the fireplace, and larger groups at a long table in the dining room.",
+    "D'estate sulla terrazza sopra il fiume, nei giorni più freschi accanto al camino, e i gruppi più numerosi a una tavolata nella sala."
+  ],
+  "Jedilnica z lesenimi tramovi in gosti za mizami": [
+    "The dining room with wooden beams and guests at the tables",
+    "La sala con travi in legno e ospiti ai tavoli"
   ]
 }
