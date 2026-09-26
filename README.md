@@ -1,16 +1,17 @@
-# Gostilna demo sites
+# Gostilna Pri Brvi
 
-Two demo restaurant websites set in the Soča valley. Both restaurants, their menus, awards and contact details are made up.
+Demo website for a fictional gostilna in the Soča valley. The gostilna, its menus, awards and contact details are made up.
 
 | File | What it is |
 | --- | --- |
-| `index.html` | **Restavracija Soča**: a working copy of the reference UI (Tailwind, Plus Jakarta Sans + Inter, Material Symbols). |
-| `pri-brvi.html` | **Gostilna Pri Brvi**: the first version, a single self-contained page with a canvas-drawn landscape, SL/EN switch and live opening status. |
+| `index.html` | **Gostilna Pri Brvi**: the demo site, built on the reference "Restavracija Soča" UI (Tailwind, Plus Jakarta Sans + Inter, Material Symbols). |
+| `pri-brvi.html` | An earlier draft with a different design: a single self-contained page with a canvas-drawn landscape, SL/EN switch and live opening status. |
 
-## Restavracija Soča (`index.html`)
+## Gostilna Pri Brvi (`index.html`)
 
-The markup and design follow the reference UI. Changes from the original:
+The markup and design follow the reference "Restavracija Soča" UI. Changes from the original:
 
+- The name is Gostilna Pri Brvi, and the river flow widget in the hero is removed.
 - Tailwind is compiled into `styles.css` instead of loaded from the play CDN (`cdn.tailwindcss.com`), which isn't meant for production.
 - The navigation links scroll to their sections, and the "Izberite ta meni" buttons add the chosen menu to the reservation notes.
 - The reservation date defaults to the next open day (Wednesday–Sunday), at least 3 days ahead.
